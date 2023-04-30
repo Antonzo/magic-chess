@@ -2,9 +2,9 @@ import React, {FC} from 'react';
 import {Cell} from "../models/Cell";
 
 interface CellProps {
-    cell: Cell;
-    selected: boolean;
-    click: (cell: Cell) => void;
+    cell: Cell
+    selected: boolean
+    click: (cell: Cell) => void
 }
 
 const CellComponent: FC<CellProps> = ({cell, selected, click}) => {
