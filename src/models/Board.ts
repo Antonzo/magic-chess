@@ -13,6 +13,7 @@ export class Board {
     lostBlackFigures: Figure[] = []
     lostWhiteFigures: Figure[] = []
 
+    // Public methods
     public initCells() {
         for (let i = 0; i < 8; i++) {
             const row: Cell[] = []
@@ -25,7 +26,6 @@ export class Board {
         }
     }
 
-    // Public methods
     public highlightCells(selectedCell: Cell | null) {
         for (let i = 0; i < this.cells.length; i ++) {
             const row = this.cells[i]
