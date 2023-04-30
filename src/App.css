@@ -3,7 +3,7 @@
     padding: 0;
 }
 
-app {
+.app {
     width: 100vw;
     height: 100vh;
     display: flex;
@@ -17,7 +17,6 @@ app {
     display: flex;
     flex-wrap: wrap;
 }
-
 .cell {
     width: 64px;
     height: 64px;
@@ -25,26 +24,31 @@ app {
     justify-content: center;
     align-items: center;
 }
-
 .cell img {
     width: 48px;
+    height: 48px;
+    position: relative;
 }
-
 .black {
-    background-color: darkblue;
+    background-color: deepskyblue;
 }
-
 .white {
-    background-color: #e7b8b8;
+    background-color: #eed4ac;
 }
 
 .selected {
-    background-color: green;
+    background-color: brown;
 }
-
 .available {
     height: 12px;
     width: 12px;
     border-radius: 50%;
-    background-color: #96d996;
+    background-color: #22c022;
+}
+
+.lost {
+    height: calc(50vh - 60px);
+    padding: 30px;
+    margin-left: 50px;
+    background-color: lightgray;
 }
