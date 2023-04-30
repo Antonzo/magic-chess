@@ -26,10 +26,25 @@ app {
     align-items: center;
 }
 
+.cell img {
+    width: 48px;
+}
+
 .black {
     background-color: darkblue;
 }
 
 .white {
     background-color: #e7b8b8;
+}
+
+.selected {
+    background-color: green;
+}
+
+.available {
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    background-color: #96d996;
 }
