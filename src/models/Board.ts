@@ -1,5 +1,5 @@
 import {Cell} from "./Cell";
-import {Colors} from "./Colors";
+import {Colors, getEnemyColor} from "./Colors";
 import {Pawn} from "./figures/Pawn";
 import {King} from "./figures/King";
 import {Queen} from "./figures/Queen";
@@ -10,8 +10,13 @@ import {Figure} from "./figures/Figure";
 
 export class Board {
     cells: Cell[][] = []
+    cellsUnderWhiteAttack: Cell[] = []
+    cellsUnderBlackAttack: Cell[] = []
     lostBlackFigures: Figure[] = []
     lostWhiteFigures: Figure[] = []
+    blackKing: King | null = null
+    whiteKing: King | null = null
+
 
     // Public methods
     public initCells() {
@@ -63,6 +68,34 @@ export class Board {
             : this.lostWhiteFigures.push(figure)
     }
 
+    public calculateAttackAreas() {
+        this.cellsUnderWhiteAttack = []
+        this.cellsUnderBlackAttack = []
+        let figures: Figure[] = []
+        this.cells.forEach(row =>
+            row.forEach(cell => {
+                if (cell.figure)
+                    figures.push(cell.figure)
+            })
+        )
+        figures.forEach(figure => {
+            this.cells.forEach(row =>
+                row.forEach(cell => {
+                    if (figure.canMove(cell))
+                        if (figure.color === Colors.BLACK) this.cellsUnderBlackAttack.push(cell)
+                        else this.cellsUnderWhiteAttack.push(cell)
+                })
+            )
+        })
+    }
+
+    public isKingUnderAttack(color: Colors): boolean {
+        const king = color === Colors.WHITE ? this.whiteKing : this.blackKing
+        if (!king) return false
+        const attackArea = color === Colors.WHITE ? this.cellsUnderBlackAttack : this.cellsUnderWhiteAttack
+        return attackArea.includes(king.cell)
+    }
+
     // Private methods
     private addPawns() {
         for (let i = 0; i < 8; i++) {
@@ -98,7 +131,7 @@ export class Board {
     }
 
     private addKings() {
-        new King(Colors.BLACK, this.getCell(4, 0))
-        new King(Colors.WHITE, this.getCell(4, 7))
+        this.blackKing = new King(Colors.BLACK, this.getCell(4, 0))
+        this.whiteKing = new King(Colors.WHITE, this.getCell(4, 7))
     }
 }

@@ -31,6 +31,11 @@ export class Cell {
         return false
     }
 
+    isUnderAttackBy(color: Colors): boolean {
+        const attackArea = color === Colors.BLACK ? this.board.cellsUnderBlackAttack : this.board.cellsUnderWhiteAttack
+        return attackArea.includes(this)
+    }
+
     isEmptyVertical(target: Cell): boolean {
         if (this.x !== target.x) return false
         const min = Math.min(this.y, target.y),
@@ -84,6 +89,7 @@ export class Cell {
             }
             target.setFigure(this.figure)
             this.figure = null
+            this.board.calculateAttackAreas()
         }
     }
 }
