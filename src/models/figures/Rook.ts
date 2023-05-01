@@ -15,10 +15,10 @@ export class Rook extends Figure {
 
     canMove(target: Cell): boolean {
         if (!super.canMove(target)) return false
-        if (this.cell.board.isKingUnderAttack(this.color)) return false
-        if (this.cell.isEmptyVertical(target)) return true
-        if (this.cell.isEmptyHorizontal(target)) return true
-        return false
+        if (!this.cell.isEmptyVertical(target) && !this.cell.isEmptyHorizontal(target)) return false
+        if (this.cell.board.isKingUnderAttack(this.color) && this.fakeAddFigure(target))
+            return false
+        return true
     }
 
     moveFigure(target: Cell) {

@@ -13,10 +13,15 @@ export class Knight extends Figure {
 
     canMove(target: Cell): boolean {
         if (!super.canMove(target)) return false
-        if (this.cell.board.isKingUnderAttack(this.color)) return false
         const dx = Math.abs(this.cell.x - target.x),
             dy = Math.abs(this.cell.y - target.y)
 
-        return (dx === 1 && dy === 2) || (dx === 2 && dy === 1)
+        if ((dx !== 1 || dy !== 2) && (dx !== 2 || dy !== 1))
+            return false
+
+        if (target.board.isKingUnderAttack(this.color) && this.fakeAddFigure(target))
+            return false
+
+        return true
     }
 }

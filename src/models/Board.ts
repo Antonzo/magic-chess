@@ -68,22 +68,39 @@ export class Board {
             : this.lostWhiteFigures.push(figure)
     }
 
-    public calculateAttackAreas() {
+    public calculateAttackAreasWhite() {
         this.cellsUnderWhiteAttack = []
-        this.cellsUnderBlackAttack = []
-        let figures: Figure[] = []
+        let whiteFigures: Figure[] = []
         this.cells.forEach(row =>
             row.forEach(cell => {
-                if (cell.figure)
-                    figures.push(cell.figure)
+                if (cell.figure?.color === Colors.WHITE)
+                    whiteFigures.push(cell.figure)
             })
         )
-        figures.forEach(figure => {
+        whiteFigures.forEach(figure => {
             this.cells.forEach(row =>
                 row.forEach(cell => {
                     if (figure.canMove(cell))
-                        if (figure.color === Colors.BLACK) this.cellsUnderBlackAttack.push(cell)
-                        else this.cellsUnderWhiteAttack.push(cell)
+                        this.cellsUnderWhiteAttack.push(cell)
+                })
+            )
+        })
+    }
+
+    public calculateAttackAreasBlack() {
+        this.cellsUnderBlackAttack = []
+        let blackFigures: Figure[] = []
+        this.cells.forEach(row =>
+            row.forEach(cell => {
+                if (cell.figure?.color === Colors.BLACK)
+                    blackFigures.push(cell.figure)
+            })
+        )
+        blackFigures.forEach(figure => {
+            this.cells.forEach(row =>
+                row.forEach(cell => {
+                    if (figure.canMove(cell))
+                        this.cellsUnderBlackAttack.push(cell)
                 })
             )
         })

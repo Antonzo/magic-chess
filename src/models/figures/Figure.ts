@@ -35,4 +35,20 @@ export class Figure {
     }
 
     moveFigure(target: Cell) {}
+
+    fakeAddFigure(target: Cell): boolean {
+        const targetRealFigure = target.figure
+        target.figure = this
+        if (this.color === Colors.WHITE)
+            target.board.calculateAttackAreasBlack()
+        else
+            target.board.calculateAttackAreasWhite()
+        const isKingUnderAttack = target.board.isKingUnderAttack(this.color)
+        target.figure = targetRealFigure
+        if (this.color === Colors.WHITE)
+            target.board.calculateAttackAreasBlack()
+        else
+            target.board.calculateAttackAreasWhite()
+        return isKingUnderAttack
+    }
 }

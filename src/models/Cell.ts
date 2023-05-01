@@ -89,7 +89,8 @@ export class Cell {
             }
             target.setFigure(this.figure)
             this.figure = null
-            this.board.calculateAttackAreas()
+            this.board.calculateAttackAreasWhite()
+            this.board.calculateAttackAreasBlack()
         }
     }
 }
