@@ -34,5 +34,8 @@ export class Figure {
         return true
     }
 
-    moveFigure(target: Cell) {}
+    moveFigure(target: Cell) {
+        if (!target.board.gameInProgress) return
+        target.board.swapPlayers()
+    }
 }
