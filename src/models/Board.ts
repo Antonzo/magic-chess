@@ -1,5 +1,5 @@
 import {Cell} from "./Cell";
-import {Colors, getEnemyColor} from "./Colors";
+import {Colors} from "./Colors";
 import {Pawn} from "./figures/Pawn";
 import {King} from "./figures/King";
 import {Queen} from "./figures/Queen";
@@ -68,7 +68,7 @@ export class Board {
             : this.lostWhiteFigures.push(figure)
     }
 
-    public calculateAttackAreasWhite() {
+    public calculateAttackAreasWhite(ignoreCheck: boolean = false) {
         this.cellsUnderWhiteAttack = []
         let whiteFigures: Figure[] = []
         this.cells.forEach(row =>
@@ -80,14 +80,14 @@ export class Board {
         whiteFigures.forEach(figure => {
             this.cells.forEach(row =>
                 row.forEach(cell => {
-                    if (figure.canMove(cell))
+                    if (figure.canMove(cell, ignoreCheck))
                         this.cellsUnderWhiteAttack.push(cell)
                 })
             )
         })
     }
 
-    public calculateAttackAreasBlack() {
+    public calculateAttackAreasBlack(ignoreCheck: boolean = false) {
         this.cellsUnderBlackAttack = []
         let blackFigures: Figure[] = []
         this.cells.forEach(row =>
@@ -99,7 +99,7 @@ export class Board {
         blackFigures.forEach(figure => {
             this.cells.forEach(row =>
                 row.forEach(cell => {
-                    if (figure.canMove(cell))
+                    if (figure.canMove(cell, ignoreCheck))
                         this.cellsUnderBlackAttack.push(cell)
                 })
             )
@@ -110,7 +110,7 @@ export class Board {
         const king = color === Colors.WHITE ? this.whiteKing : this.blackKing
         if (!king) return false
         const attackArea = color === Colors.WHITE ? this.cellsUnderBlackAttack : this.cellsUnderWhiteAttack
-        return attackArea.includes(king.cell)
+        return !!attackArea.includes(king.cell)
     }
 
     // Private methods

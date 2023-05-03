@@ -13,11 +13,10 @@ export class Rook extends Figure {
         this.name = FigureNames.ROOK
     }
 
-    canMove(target: Cell): boolean {
+    canMove(target: Cell, ignoreCheck: boolean = false): boolean {
         if (!super.canMove(target)) return false
         if (!this.cell.isEmptyVertical(target) && !this.cell.isEmptyHorizontal(target)) return false
-        if (this.cell.board.isKingUnderAttack(this.color) && this.fakeAddFigure(target))
-            return false
+        if (!ignoreCheck && this.cell.fakeStepCheck(target)) return false
         return true
     }
 

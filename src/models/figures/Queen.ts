@@ -11,7 +11,7 @@ export class Queen extends Figure {
         this.name = FigureNames.QUEEN
     }
 
-    canMove(target: Cell): boolean {
+    canMove(target: Cell, ignoreCheck: boolean = false): boolean {
         if (!super.canMove(target)) return false
         if (
             !this.cell.isEmptyVertical(target)
@@ -19,8 +19,7 @@ export class Queen extends Figure {
             && !this.cell.isEmptyDiagonal(target)
            )
             return false
-        if (this.cell.board.isKingUnderAttack(this.color) && this.fakeAddFigure(target))
-            return false
+        if (!ignoreCheck && this.cell.fakeStepCheck(target)) return false
         return true
     }
 }

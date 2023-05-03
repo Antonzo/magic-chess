@@ -31,11 +31,6 @@ export class Cell {
         return false
     }
 
-    isUnderAttackBy(color: Colors): boolean {
-        const attackArea = color === Colors.BLACK ? this.board.cellsUnderBlackAttack : this.board.cellsUnderWhiteAttack
-        return attackArea.includes(this)
-    }
-
     isEmptyVertical(target: Cell): boolean {
         if (this.x !== target.x) return false
         const min = Math.min(this.y, target.y),
@@ -92,5 +87,26 @@ export class Cell {
             this.board.calculateAttackAreasWhite()
             this.board.calculateAttackAreasBlack()
         }
+    }
+
+    fakeStepCheck(target: Cell): boolean {
+        if (this.figure === null) return false
+        const targetFigure = target.figure
+        this.figure.cell = target
+        target.figure = this.figure
+        this.figure = null
+        if (target.figure.color === Colors.WHITE)
+            target.board.calculateAttackAreasBlack(true)
+        else
+            target.board.calculateAttackAreasWhite(true)
+        const isKingUnderAttack = target.board.isKingUnderAttack(target.figure.color)
+        this.figure = target.figure
+        this.figure.cell = this
+        target.figure = targetFigure
+        if (this.figure.color === Colors.WHITE)
+            target.board.calculateAttackAreasBlack(true)
+        else
+            target.board.calculateAttackAreasWhite(true)
+        return isKingUnderAttack
     }
 }
