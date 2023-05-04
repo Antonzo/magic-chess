@@ -6,20 +6,16 @@ import {Player} from "../models/Player";
 
 interface BoardProps {
     board: Board
-    setBoard: (board: Board) => void
-    currentPlayer: Player | null
-    swapPlayer: () => void
 }
 
-const BoardComponent: FC<BoardProps> = ({board, setBoard, currentPlayer, swapPlayer}) => {
+const BoardComponent: FC<BoardProps> = ({board}) => {
     const [selectedCell, setSelectedCell] = useState<Cell | null>(null)
+    const [currentPlayer, setCurrentPlayer] = useState<Player | null>(board.getActivePlayer())
 
     function click(cell: Cell) {
         if (selectedCell && selectedCell !== cell && selectedCell.figure?.canMove(cell)) {
             selectedCell.moveFigure(cell)
-            swapPlayer()
             setSelectedCell(null)
-            updateBoard()
         }
         else {
             if (cell.figure?.color === currentPlayer?.color) {
@@ -34,13 +30,8 @@ const BoardComponent: FC<BoardProps> = ({board, setBoard, currentPlayer, swapPla
 
     function highlightCells() {
         board.highlightCells(selectedCell)
-        updateBoard()
     }
 
-    function updateBoard() {
-        const newBoard = board.getCopyBoard()
-        setBoard(newBoard)
-    }
 
     return (
         <div className="board">

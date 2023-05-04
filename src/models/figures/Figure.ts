@@ -29,11 +29,13 @@ export class Figure {
         this.id = Math.random()
     }
 
-    canMove(target: Cell): boolean {
+    canMove(target: Cell, ignoreCheck: boolean = false): boolean {
         if (this.color === target.figure?.color) return false
-        if (target.figure?.name === FigureNames.KING) return false
         return true
     }
 
-    moveFigure(target: Cell) {}
+    moveFigure(target: Cell) {
+        if (!target.board.gameInProgress) return
+        target.board.swapPlayers()
+    }
 }

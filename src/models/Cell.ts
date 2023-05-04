@@ -84,6 +84,29 @@ export class Cell {
             }
             target.setFigure(this.figure)
             this.figure = null
+            this.board.calculateAttackAreasWhite()
+            this.board.calculateAttackAreasBlack()
         }
+    }
+
+    fakeStepCheck(target: Cell): boolean {
+        if (this.figure === null) return false
+        const targetFigure = target.figure
+        this.figure.cell = target
+        target.figure = this.figure
+        this.figure = null
+        if (target.figure.color === Colors.WHITE)
+            target.board.calculateAttackAreasBlack(true)
+        else
+            target.board.calculateAttackAreasWhite(true)
+        const isKingUnderAttack = target.board.isKingUnderAttack(target.figure.color)
+        this.figure = target.figure
+        this.figure.cell = this
+        target.figure = targetFigure
+        if (this.figure.color === Colors.WHITE)
+            target.board.calculateAttackAreasBlack(true)
+        else
+            target.board.calculateAttackAreasWhite(true)
+        return isKingUnderAttack
     }
 }

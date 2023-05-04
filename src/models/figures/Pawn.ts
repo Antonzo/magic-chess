@@ -14,25 +14,25 @@ export class Pawn extends Figure {
         this.name = FigureNames.PAWN
     }
 
-    canMove(target: Cell): boolean {
+    canMove(target: Cell, ignoreCheck: boolean = false): boolean {
         if (!super.canMove(target)) return false
+
         const direction = this.cell.figure?.color === Colors.BLACK ? 1 : -1
         const firstStepDirection = this.cell.figure?.color === Colors.BLACK ? 2 : -2
-
         // Step
-        if ((target.y === this.cell.y + direction || this.isFirstStep
-            && (target.y === this.cell.y + firstStepDirection))
+        const stepCondition = ((target.y === this.cell.y + direction || this.isFirstStep
+                && (target.y === this.cell.y + firstStepDirection))
             && target.x === this.cell.x
             && this.cell.board.getCell(target.x, target.y).isEmpty())
-            return true
-
         // Attack
-        if (target.y === this.cell.y + direction
+        const attackCondition = (target.y === this.cell.y + direction
             && (target.x === this.cell.x + 1 || target.x === this.cell.x - 1)
             && this.cell.isEnemy(target))
-            return true
+        if (!stepCondition && !attackCondition) return false
 
-        return false
+        if (!ignoreCheck && this.cell.fakeStepCheck(target)) return false
+
+        return true
     }
 
     moveFigure(target: Cell) {
