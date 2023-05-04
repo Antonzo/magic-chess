@@ -9,7 +9,6 @@ function App() {
     const [board, setBoard] = useState(new Board())
 
     useEffect(() => {
-        console.log('init game')
         initGame()
     }, [])
 
