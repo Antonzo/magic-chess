@@ -13,7 +13,6 @@ const CellComponent: FC<CellProps> = ({cell, selected, click}) => {
 
     useEffect(() => {
         const cellObserver = (cell: Cell) => {
-            console.log('cell changed', cell.available, cell.figure)
             setCellAvailable(cell.available)
             setCellFigure(cell.figure)
         }
