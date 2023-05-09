@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {Cell} from "../models/Cell";
 
 interface CellProps {
@@ -8,14 +8,28 @@ interface CellProps {
 }
 
 const CellComponent: FC<CellProps> = ({cell, selected, click}) => {
+    const [cellAvailable, setCellAvailable] = useState(cell.available)
+    const [cellFigure, setCellFigure] = useState(cell.figure)
+
+    useEffect(() => {
+        const cellObserver = (cell: Cell) => {
+            setCellAvailable(cell.available)
+            setCellFigure(cell.figure)
+        }
+        cell.addObserver(cellObserver)
+        return () => {
+            cell.removeObserver(cellObserver)
+        }
+    }, [cell])
+
     return (
         <div
             className={['cell', cell.color, selected ? "selected" : ""].join(" ")}
             onClick={() => click(cell)}
-            style={{background: cell.available && cell.figure ? 'green' : ''}}
+            style={{background: cellAvailable && cellFigure ? 'green' : ''}}
         >
-            {cell.available && !cell.figure && <div className="available" />}
-            {cell.figure?.logo && <img src={cell.figure.logo} alt="" />}
+            {cellAvailable && !cellFigure && <div className="available" />}
+            {cellFigure?.logo && <img src={cellFigure.logo} alt="" />}
         </div>
     );
 };

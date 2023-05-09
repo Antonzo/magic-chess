@@ -10,9 +10,9 @@ interface BoardProps {
 
 const BoardComponent: FC<BoardProps> = ({board}) => {
     const [selectedCell, setSelectedCell] = useState<Cell | null>(null)
-    const [currentPlayer, setCurrentPlayer] = useState<Player | null>(board.getActivePlayer())
 
     function click(cell: Cell) {
+        const currentPlayer = board.getActivePlayer()
         if (selectedCell && selectedCell !== cell && selectedCell.figure?.canMove(cell)) {
             selectedCell.moveFigure(cell)
             setSelectedCell(null)

@@ -10,6 +10,7 @@ export class Cell {
     board: Board
     available: Boolean
     id: number // For react keys
+    private observers: ((cell: Cell) => void)[] = []
 
     constructor(board: Board, x: number, y:number, color: Colors, figure: Figure | null) {
         this.x = x
@@ -21,17 +22,30 @@ export class Cell {
         this.id = Math.random()
     }
 
-    isEmpty(): boolean {
+
+    // public methods
+    public addObserver(observer: (cell: Cell) => void) {
+        this.observers.push(observer)
+    }
+
+    public removeObserver(observer: (cell: Cell) => void) {
+        const index = this.observers.indexOf(observer)
+        if (index !== -1) {
+            this.observers.splice(index, 1)
+        }
+    }
+
+    public isEmpty(): boolean {
         return this.figure === null
     }
 
-    isEnemy(target: Cell): boolean {
+    public isEnemy(target: Cell): boolean {
         if (target.figure)
             return this.figure?.color !== target.figure.color
         return false
     }
 
-    isEmptyVertical(target: Cell): boolean {
+    public isEmptyVertical(target: Cell): boolean {
         if (this.x !== target.x) return false
         const min = Math.min(this.y, target.y),
             max = Math.max(this.y, target.y)
@@ -44,7 +58,7 @@ export class Cell {
         return true
     }
 
-    isEmptyHorizontal(target: Cell): boolean {
+    public isEmptyHorizontal(target: Cell): boolean {
         if (this.y !== target.y) return false
         const min = Math.min(this.x, target.x),
             max = Math.max(this.x, target.x)
@@ -57,7 +71,7 @@ export class Cell {
         return true
     }
 
-    isEmptyDiagonal(target: Cell): boolean {
+    public isEmptyDiagonal(target: Cell): boolean {
         const absX = Math.abs(target.x - this.x),
             absY = Math.abs(target.y - this.y)
         if (absX !== absY) return false
@@ -71,12 +85,18 @@ export class Cell {
         return true
     }
 
-    setFigure(figure: Figure) {
+    public setFigure(figure: Figure) {
         this.figure = figure
         this.figure.cell = this
+        this.notifyObservers()
     }
 
-    moveFigure(target: Cell) {
+    public setAvailable(available: boolean) {
+        this.available = available
+        this.notifyObservers()
+    }
+
+    public moveFigure(target: Cell) {
         if (this.figure && this.figure.canMove(target)) {
             this.figure?.moveFigure(target)
             if (target.figure) {
@@ -89,7 +109,7 @@ export class Cell {
         }
     }
 
-    fakeStepCheck(target: Cell): boolean {
+    public fakeStepCheck(target: Cell): boolean {
         if (this.figure === null) return false
         const targetFigure = target.figure
         this.figure.cell = target
@@ -108,5 +128,10 @@ export class Cell {
         else
             target.board.calculateAttackAreasWhite(true)
         return isKingUnderAttack
+    }
+
+    // private methods
+    private notifyObservers() {
+        this.observers.forEach(observer => observer(this));
     }
 }
