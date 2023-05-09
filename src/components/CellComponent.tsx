@@ -1,6 +1,5 @@
 import React, {FC, useEffect, useState} from 'react';
 import {Cell} from "../models/Cell";
-import {Player} from "../models/Player";
 
 interface CellProps {
     cell: Cell
