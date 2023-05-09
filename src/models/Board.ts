@@ -30,7 +30,6 @@ export class Board {
         this.addFigures()
     }
 
-    // Public methods
     public start() {
         this.gameInProgress = true
         this.whitePlayer.activate()
@@ -58,7 +57,7 @@ export class Board {
             const row = this.cells[i]
             for (let j = 0; j < row.length; j++) {
                 const target = row[j]
-                target.available = !!selectedCell?.figure?.canMove(target)
+                target.setAvailable(!!selectedCell?.figure?.canMove(target))
             }
         }
     }
@@ -118,7 +117,7 @@ export class Board {
         return !!attackArea.includes(king.cell)
     }
 
-    // Private methods
+    // private methods
     private initCells() {
         for (let i = 0; i < 8; i++) {
             const row: Cell[] = []

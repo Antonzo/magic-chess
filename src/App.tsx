@@ -21,7 +21,7 @@ function App() {
 
     return (
       <div className="app">
-        <Timer whitePlayerTime={board.whitePlayer.timeLeft} blackPlayerTime={board.blackPlayer.timeLeft} />
+        <Timer whitePlayer={board.whitePlayer} blackPlayer={board.blackPlayer} />
         <BoardComponent board={board} />
         <div>
           <LostFigures
