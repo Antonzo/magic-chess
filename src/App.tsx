@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import './App.css'
-import BoardComponent from "./components/BoardComponent";
-import {Board} from "./models/Board";
-import LostFigures from "./components/LostFigures";
-import Timer from "./components/Timer";
+import 'App.css'
+import BoardComponent from "components/BoardComponent";
+import {Board} from "models/Board";
+import LostFigures from "components/LostFigures";
+import Timer from "components/Timer";
 
 function App() {
     const [board, setBoard] = useState(new Board())

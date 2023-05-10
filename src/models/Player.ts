@@ -1,5 +1,5 @@
-import {Colors} from "./Colors";
-import {Board} from "./Board";
+import {Colors} from "models/Colors";
+import {Board} from "models/Board";
 
 export class Player {
     color: Colors

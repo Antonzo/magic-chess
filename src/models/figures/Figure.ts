@@ -1,6 +1,6 @@
-import logo from '../../assets/black-king.png'
-import {Colors} from "../Colors";
-import {Cell} from "../Cell";
+import logo from 'assets/black-king.png'
+import {Colors} from "models/Colors";
+import {Cell} from "models/Cell";
 
 export enum FigureNames {
     FIGURE = "Figure",

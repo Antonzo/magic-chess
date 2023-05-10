@@ -1,5 +1,5 @@
 import React, {FC, useEffect, useState} from 'react';
-import {Cell} from "../models/Cell";
+import {Cell} from "models/Cell";
 
 interface CellProps {
     cell: Cell
