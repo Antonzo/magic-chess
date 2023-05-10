@@ -1,0 +1,58 @@
+@import '../variables/breakpoints';
+@import '../variables/typography';
+
+html {
+  font-family: europa, sans-serif !important;
+  font-size: 15px;
+  @include md-and-up {
+    font-size: 16px;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: unset;
+}
+
+.word-break-all {
+  word-break: break-all;
+}
+
+.headline-1 {
+  @include headline-1;
+}
+.headline-2 {
+  @include headline-2;
+}
+.headline-3 {
+  @include headline-3;
+}
+.headline-4 {
+  @include headline-4;
+}
+.text-large {
+  @include text-large;
+}
+.text-regular {
+  @include text-regular;
+}
+.text-small {
+  @include text-small;
+}
+.text-detail {
+  @include text-detail;
+}
+
+.font-bold {
+  @include font-bold;
+}
+.font-regular {
+  @include font-regular;
+}
+.font-light {
+  @include font-light;
+}

@@ -1,0 +1,10 @@
+@import "../variables/colors";
+
+@each $c-key, $color in $chessColors {
+  .#{$c-key} {
+    color: $color !important;
+  }
+  .bg-#{$c-key} {
+    background-color: $color !important;
+  }
+}

@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import 'App.css'
+import 'App.scss'
 import BoardComponent from "components/BoardComponent";
 import {Board} from "models/Board";
 import LostFigures from "components/LostFigures";

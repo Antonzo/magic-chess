@@ -1,0 +1,126 @@
+@import "./breakpoints";
+
+@mixin headline-1 {
+  font-size: 1.87em;
+  padding-bottom: 0.4em;
+  line-height: 1.1em;
+  color: inherit;
+  letter-spacing: -0.03em;
+  font-weight: inherit;
+  word-wrap: break-word;
+  @include md-and-up {
+    line-height: 1.1em;
+    font-size: 3.125em;
+  }
+}
+
+@mixin headline-2 {
+  font-size: 1.6em;
+  padding-bottom: 0.4em;
+  line-height: 1.1em;
+  color: inherit;
+  letter-spacing: -0.03em;
+  font-weight: inherit;
+  word-wrap: break-word;
+  @include md-and-up {
+    line-height: 1.1em;
+    font-size: 2.375em;
+  }
+}
+
+@mixin headline-3 {
+  font-size: 1.33em;
+  padding-bottom: 0.4em;
+  line-height: 1.1em;
+  color: inherit;
+  letter-spacing: -0.03em;
+  font-weight: inherit;
+  word-wrap: break-word;
+  @include md-and-up {
+    font-size: 1.875em;
+    line-height: 1.05em;
+  }
+}
+
+@mixin headline-4 {
+  font-size: 1.2em;
+  padding-bottom: 0.4em;
+  line-height: 1.1em;
+  color: inherit;
+  letter-spacing: -0.03em;
+  font-weight: inherit;
+  word-wrap: break-word;
+  @include md-and-up {
+    line-height: 1.05em;
+    font-size: 1.5625em;
+  }
+}
+
+@mixin text-large {
+  font-size: 1.07em;
+  padding-bottom: 0px;
+  line-height: 1.25em;
+  color: inherit;
+  letter-spacing: -0.03em;
+  font-weight: inherit;
+  word-wrap: break-word;
+  @include md-and-up {
+    font-size: 1.125em;
+    line-height: 1.25em;
+  }
+}
+
+
+@mixin text-regular {
+  font-size: 1em;
+  padding-bottom: 0px;
+  line-height: 1.25em;
+  color: inherit;
+  letter-spacing: -0.03em;
+  font-weight: inherit;
+  word-wrap: break-word;
+  @include md-and-up {
+    font-size: 1em;
+    line-height: 1.25em;
+  }
+}
+
+@mixin text-small {
+  font-size: 0.933em;
+  padding-bottom: 0px;
+  line-height: 1.25em;
+  color: inherit;
+  letter-spacing: -0.03em;
+  font-weight: inherit;
+  word-wrap: break-word;
+  @include md-and-up {
+    line-height: 1.25em;
+    font-size: 0.875em;
+  }
+}
+
+@mixin text-detail {
+  font-size: 0.8em;
+  padding-bottom: 0px;
+  line-height: 1.25em;
+  color: inherit;
+  letter-spacing: -0.03em;
+  font-weight: inherit;
+  word-wrap: break-word;
+  @include md-and-up {
+    line-height: 1.25em;
+    font-size: 0.75em;
+  }
+}
+
+@mixin font-bold {
+  font-weight: 900;
+}
+
+@mixin font-regular {
+  font-weight: 500;
+}
+
+@mixin font-light {
+  font-weight: 300;
+}
