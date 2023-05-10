@@ -1,5 +1,6 @@
 import React, {FC, useEffect, useState} from 'react';
 import {Cell} from "models/Cell";
+import "components/CellComponent.scss"
 
 interface CellProps {
     cell: Cell
@@ -22,14 +23,22 @@ const CellComponent: FC<CellProps> = ({cell, selected, click}) => {
         }
     }, [cell])
 
+    function getColorClass() {
+        if (cellAvailable && cellFigure)
+            return 'bg-color-available'
+        if (selected)
+            return 'bg-color-selected'
+        return `bg-color-${cell.color}`
+    }
+
+
     return (
         <div
-            className={['cell', cell.color, selected ? "selected" : ""].join(" ")}
+            className={['cell d-flex justify-center align-center', getColorClass()].join(" ")}
             onClick={() => click(cell)}
-            style={{background: cellAvailable && cellFigure ? 'green' : ''}}
         >
             {cellAvailable && !cellFigure && <div className="available" />}
-            {cellFigure?.logo && <img src={cellFigure.logo} alt="" />}
+            {cellFigure?.logo && <img className="cell__figure-logo" src={cellFigure.logo} alt="" />}
         </div>
     );
 };

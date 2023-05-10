@@ -1,3 +1,5 @@
 $displayTypes: inline block inline-block flex inline-flex grid inline-grid table table-row table-cell none;
 $justifyContentTypes: center start end flex-start flex-end left right normal space-between space-around space-evenly stretch;
 $alignItemsTypes: center start end flex-start flex-end left right normal space-between space-around space-evenly stretch;
+$flexWrapTypes: nowrap wrap wrap-reverse;
+$positionTypes: static relative absolute fixed sticky;

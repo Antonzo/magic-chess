@@ -1,7 +1,11 @@
-$colorChessBlack: #252c56;
+$colorChessBlack: #28316b;
 $colorChessWhite: #e0cc6b;
+$colorAvailable: #a52a2a;
+$colorSelected:  #22c022;
 
 $chessColors: (
-        "chess-black": $colorChessBlack,
-        "chess-white": $colorChessWhite
+        "color-black": $colorChessBlack,
+        "color-white": $colorChessWhite,
+        "color-available": $colorAvailable,
+        "color-selected": $colorSelected,
 )

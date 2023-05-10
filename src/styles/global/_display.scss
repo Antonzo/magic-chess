@@ -7,13 +7,25 @@
 }
 
 @each $jctype in $justifyContentTypes {
-    .justify-content-#{$jctype} {
+    .justify-#{$jctype} {
         justify-content: $jctype;
     }
 }
 
 @each $aitype in $alignItemsTypes {
-  .justify-content-#{$aitype} {
+  .align-#{$aitype} {
     align-items: $aitype;
+  }
+}
+
+@each $fwrap in $flexWrapTypes {
+  .flex-#{$fwrap} {
+    flex-wrap: $fwrap;
+  }
+}
+
+@each $position in $positionTypes {
+  .position-#{$position} {
+    position: $position;
   }
 }
