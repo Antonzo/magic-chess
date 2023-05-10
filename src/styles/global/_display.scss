@@ -1,0 +1,19 @@
+@import "../variables/display";
+
+@each $dtype in $displayTypes {
+  .d-#{$dtype} {
+    display: $dtype;
+  }
+}
+
+@each $jctype in $justifyContentTypes {
+    .justify-content-#{$jctype} {
+        justify-content: $jctype;
+    }
+}
+
+@each $aitype in $alignItemsTypes {
+  .justify-content-#{$aitype} {
+    align-items: $aitype;
+  }
+}
