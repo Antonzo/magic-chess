@@ -1,6 +1,6 @@
 import React, {FC, useEffect, useState} from 'react';
 import {Cell} from "models/Cell";
-import "components/CellComponent.scss"
+import "components/game/CellComponent.scss"
 
 interface CellProps {
     cell: Cell
@@ -37,7 +37,7 @@ const CellComponent: FC<CellProps> = ({cell, selected, click}) => {
             className={['cell d-flex justify-center align-center', getColorClass()].join(" ")}
             onClick={() => click(cell)}
         >
-            {cellAvailable && !cellFigure && <div className="available" />}
+            {cellAvailable && !cellFigure && <div className="cell__step-indicator rounded-circle bg-color-selected" />}
             {cellFigure?.logo && <img className="cell__figure-logo" src={cellFigure.logo} alt="" />}
         </div>
     );

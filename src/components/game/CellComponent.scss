@@ -1,0 +1,19 @@
+.cell {
+  min-width: 30px;
+  min-height: 30px;
+
+  &__figure-logo {
+    width: 80%;
+    height: 80%;
+    max-width: 50px;
+    max-height: 50px;
+    position: relative;
+  }
+
+  &__step-indicator {
+    height: 20%;
+    width: 20%;
+    max-height: 25px;
+    max-width: 25px;
+  }
+}

@@ -1,7 +1,8 @@
 import React, {FC, useEffect, useState} from 'react';
 import {Board} from "models/Board";
 import {Cell} from "models/Cell";
-import CellComponent from "components/CellComponent";
+import CellComponent from "components/game/CellComponent";
+import "components/game/BoardComponent.scss"
 
 interface BoardProps {
     board: Board

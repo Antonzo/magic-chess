@@ -2,4 +2,13 @@ $displayTypes: inline block inline-block flex inline-flex grid inline-grid table
 $justifyContentTypes: center start end flex-start flex-end left right normal space-between space-around space-evenly stretch;
 $alignItemsTypes: center start end flex-start flex-end left right normal space-between space-around space-evenly stretch;
 $flexWrapTypes: nowrap wrap wrap-reverse;
+$flexDirectionTypes: row row-reverse column column-reverse;
 $positionTypes: static relative absolute fixed sticky;
+$borderRadiusTypes: (
+        0: 0,
+        1: 4px,
+        2: 8px,
+        3: 24px,
+        pill: 9999px,
+        circle: 50%
+);
