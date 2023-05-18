@@ -1,5 +1,6 @@
-import React, {FC} from 'react';
-import {Figure} from "models/figures/Figure";
+import React, {FC} from 'react'
+import {Figure} from "models/figures/Figure"
+import "components/game/LostFigures.scss"
 
 interface lostFiguresProps {
     title: string
@@ -8,7 +9,7 @@ interface lostFiguresProps {
 
 const LostFigures: FC<lostFiguresProps> = ({title, figures}) => {
     return (
-        <div className="lost">
+        <div className="lost-figures full-width pa-6">
             <h3>{title}</h3>
             {figures.map(figure =>
                 <div key={figure.id}>

@@ -1,5 +1,5 @@
-import React, {FC, useEffect, useState} from 'react';
-import {Cell} from "models/Cell";
+import React, {FC, useEffect, useState} from 'react'
+import {Cell} from "models/Cell"
 import "components/game/CellComponent.scss"
 
 interface CellProps {
@@ -24,11 +24,12 @@ const CellComponent: FC<CellProps> = ({cell, selected, click}) => {
     }, [cell])
 
     function getColorClass() {
+        let color = `${cell.color}`
         if (cellAvailable && cellFigure)
-            return 'bg-color-available'
+            color = "available"
         if (selected)
-            return 'bg-color-selected'
-        return `bg-color-${cell.color}`
+            color = "selected"
+        return `bg-color-chess-${color}`
     }
 
 

@@ -1,6 +1,6 @@
 @import "../variables/colors";
 
-@each $c-key, $color in $chessColors {
+@each $c-key, $color in $colors {
   .#{$c-key} {
     color: $color;
   }

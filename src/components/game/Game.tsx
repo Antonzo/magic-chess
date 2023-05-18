@@ -20,17 +20,15 @@ function Game() {
     }
 
     return (
-        <div>
-            <div className="game d-flex flex-column justify-center align-center full-width full-height">
-                <Timer player={board.blackPlayer} />
-                <BoardComponent board={board} />
-                <Timer player={board.whitePlayer} />
-            </div>
-            <div>
+        <div className="d-flex flex-column align-center justify-center full-width full-height">
+            <div className="board-wrapper d-flex flex-column justify-center align-flex-end">
                 <LostFigures
                     title="Black figures"
                     figures={board.lostBlackFigures}
                 />
+                <Timer player={board.blackPlayer} />
+                <BoardComponent board={board} />
+                <Timer player={board.whitePlayer} />
                 <LostFigures
                     title="White figures"
                     figures={board.lostWhiteFigures}
