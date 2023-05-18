@@ -1,8 +1,8 @@
-import React, {useState, useEffect} from 'react';
-import BoardComponent from "components/game/BoardComponent";
-import {Board} from "models/Board";
-import LostFigures from "components/game/LostFigures";
-import Timer from "components/game/Timer";
+import React, {useState, useEffect} from 'react'
+import BoardComponent from "components/game/BoardComponent"
+import {Board} from "models/Board"
+import LostFigures from "components/game/LostFigures"
+import Timer from "components/game/Timer"
 import "components/game/Game.scss"
 
 function Game() {

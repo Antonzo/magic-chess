@@ -9,7 +9,7 @@ interface lostFiguresProps {
 
 const LostFigures: FC<lostFiguresProps> = ({title, figures}) => {
     return (
-        <div className="lost-figures full-width pa-6">
+        <div className="lost-figures full-width pa-6 bg-grey-3">
             <h3>{title}</h3>
             {figures.map(figure =>
                 <div key={figure.id}>
