@@ -4,6 +4,7 @@ $alignItemsTypes: center start end flex-start flex-end left right normal space-b
 $flexWrapTypes: nowrap wrap wrap-reverse;
 $flexDirectionTypes: row row-reverse column column-reverse;
 $positionTypes: static relative absolute fixed sticky;
+$alignSelfTypes: start end center baseline auto stretch;
 $borderRadiusTypes: (
         0: 0,
         1: 4px,

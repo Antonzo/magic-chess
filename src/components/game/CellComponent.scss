@@ -8,6 +8,7 @@
     max-width: 50px;
     max-height: 50px;
     position: relative;
+    user-select: none;
   }
 
   &__step-indicator {

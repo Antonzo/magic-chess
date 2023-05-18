@@ -38,7 +38,7 @@ const CellComponent: FC<CellProps> = ({cell, selected, click}) => {
             onClick={() => click(cell)}
         >
             {cellAvailable && !cellFigure && <div className="cell__step-indicator rounded-circle bg-color-selected" />}
-            {cellFigure?.logo && <img className="cell__figure-logo" src={cellFigure.logo} alt="" />}
+            {cellFigure?.logo && <img className="cell__figure-logo" src={cellFigure.logo} draggable="false" alt="" />}
         </div>
     );
 };

@@ -3,6 +3,7 @@ import BoardComponent from "components/game/BoardComponent";
 import {Board} from "models/Board";
 import LostFigures from "components/game/LostFigures";
 import Timer from "components/game/Timer";
+import "components/game/Game.scss"
 
 function Game() {
     const [board, setBoard] = useState(new Board())
@@ -14,15 +15,17 @@ function Game() {
 
     function initGame() {
         const newBoard = new Board()
-        newBoard.start()
+        // newBoard.start()
         setBoard(newBoard)
     }
 
     return (
-        <div className="game d-flex justify-center align-center full-width full-height">
-            <Timer player={board.blackPlayer} />
-            <BoardComponent board={board} />
-            <Timer player={board.whitePlayer} />
+        <div>
+            <div className="game d-flex flex-column justify-center align-center full-width full-height">
+                <Timer player={board.blackPlayer} />
+                <BoardComponent board={board} />
+                <Timer player={board.whitePlayer} />
+            </div>
             <div>
                 <LostFigures
                     title="Black figures"

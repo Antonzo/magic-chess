@@ -2,9 +2,9 @@
 
 @each $c-key, $color in $chessColors {
   .#{$c-key} {
-    color: $color !important;
+    color: $color;
   }
   .bg-#{$c-key} {
-    background-color: $color !important;
+    background-color: $color;
   }
 }
