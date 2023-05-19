@@ -41,7 +41,7 @@ const BoardComponent: FC<BoardProps> = ({board}) => {
                         <CellComponent
                             key={cell.id}
                             cell={cell}
-                            selected={cell.x === selectedCell?.x && cell.y === selectedCell?.y}
+                            selected={cell.x === selectedCell?.x && cell.y === selectedCell?.y && board.gameInProgress }
                             click={click}
                         />
                     )}

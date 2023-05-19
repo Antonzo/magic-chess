@@ -24,22 +24,21 @@ const CellComponent: FC<CellProps> = ({cell, selected, click}) => {
     }, [cell])
 
     function getColorClass() {
-        let color = `${cell.color}`
         if (cellAvailable && cellFigure)
-            color = "available"
+            return 'bg-color-chess-available'
         if (selected)
-            color = "selected"
-        return `bg-color-chess-${color}`
+            return 'bg-color-chess-selected'
+        return `bg-color-chess-${cell.color}`
     }
 
 
     return (
         <div
-            className={['cell d-flex justify-center align-center', getColorClass()].join(" ")}
+            className={['cell d-flex justify-center align-center full-width', getColorClass()].join(" ")}
             onClick={() => click(cell)}
         >
-            {cellAvailable && !cellFigure && <div className="cell__step-indicator rounded-circle bg-color-selected" />}
-            {cellFigure?.logo && <img className="cell__figure-logo" src={cellFigure.logo} draggable="false" alt="" />}
+            {cellAvailable && !cellFigure && <div className="cell__step-indicator rounded-circle bg-color-chess-selected" />}
+            {cellFigure?.logo && <img className="cell__figure-logo position-relative" src={cellFigure.logo} draggable="false" alt="" />}
         </div>
     );
 };

@@ -1,13 +1,9 @@
 .cell {
-  min-width: 30px;
-  min-height: 30px;
+  aspect-ratio: 1/1;
 
   &__figure-logo {
-    width: 80%;
-    height: 80%;
-    max-width: 50px;
-    max-height: 50px;
-    position: relative;
+    width: 70%;
+    height: 70%;
     user-select: none;
   }
 
