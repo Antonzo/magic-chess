@@ -1,0 +1,7 @@
+@import "../../styles/variables/breakpoints";
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(8, minmax(0, 100px));
+    grid-template-rows: repeat(8, 1fr);
+}

@@ -1,6 +1,6 @@
-import {Colors} from "./Colors";
-import {Figure} from "./figures/Figure"
-import {Board} from "./Board";
+import {Colors} from "models/Colors";
+import {Figure} from "models/figures/Figure"
+import {Board} from "models/Board";
 
 export class Cell {
     readonly x: number
@@ -92,6 +92,8 @@ export class Cell {
     }
 
     public setAvailable(available: boolean) {
+        if (available)
+            console.log("setAvailable", this.x, this.y)
         this.available = available
         this.notifyObservers()
     }

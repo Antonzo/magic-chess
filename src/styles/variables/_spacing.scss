@@ -1,0 +1,15 @@
+$spacerStepSize: 4px;
+$spacers-steps: 16;
+$properties: (
+        m: margin,
+        p: padding
+);
+$directions: (
+        t: top,
+        b: bottom,
+        l: left,
+        r: right,
+        x: left right,
+        y: top bottom,
+        a: left right top bottom
+);

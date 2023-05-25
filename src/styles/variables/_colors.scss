@@ -1,0 +1,40 @@
+@import "../helpers/maps";
+
+$colorWhite: #ffffff;
+$colorBlack: #000000;
+$colorGrey1: rgb(243, 243, 243);
+$colorGrey2: rgb(230, 230, 230);
+$colorGrey3: rgba(217, 217, 217);
+$colorGrey4: rgba(192, 192, 192);
+$colorGrey5: rgba(128, 128, 128);
+$colorGrey6: rgba(64, 64, 64);
+
+$colorChessBlack: #28316b;
+$colorChessWhite: #e0cc6b;
+$colorAvailable: #a52a2a;
+$colorSelected:  #22c022;
+
+$mainColors: (
+    "transparent": transparent,
+);
+
+$greys: (
+    "white": $colorWhite,
+    "black": $colorBlack,
+    "grey-1": $colorGrey1,
+    "grey-2": $colorGrey2,
+    "grey-3": $colorGrey3,
+    "grey-4": $colorGrey4,
+    "grey-5": $colorGrey5,
+    "grey-6": $colorGrey6,
+);
+
+
+$chessColors: (
+    "color-chess-black": $colorChessBlack,
+    "color-chess-white": $colorChessWhite,
+    "color-chess-available": $colorAvailable,
+    "color-chess-selected": $colorSelected,
+);
+
+$colors: map-collect($mainColors, $greys, $chessColors);

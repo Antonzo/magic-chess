@@ -1,0 +1,16 @@
+.cell {
+  aspect-ratio: 1/1;
+
+  &__figure-logo {
+    width: 70%;
+    height: 70%;
+    user-select: none;
+  }
+
+  &__step-indicator {
+    height: 20%;
+    width: 20%;
+    max-height: 25px;
+    max-width: 25px;
+  }
+}

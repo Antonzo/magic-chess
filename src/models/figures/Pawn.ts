@@ -1,8 +1,8 @@
-import {Figure, FigureNames} from "./Figure";
-import {Colors} from "../Colors";
-import {Cell} from "../Cell";
-import blackLogo from "../../assets/black-pawn.png";
-import whiteLogo from "../../assets/white-pawn.png";
+import {Figure, FigureNames} from "models/figures/Figure";
+import {Colors} from "models/Colors";
+import {Cell} from "models/Cell";
+import blackLogo from "assets/black-pawn.png";
+import whiteLogo from "assets/white-pawn.png";
 
 export class Pawn extends Figure {
 

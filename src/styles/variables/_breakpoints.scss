@@ -1,0 +1,93 @@
+// For generating other classes, see e.g. display.scss
+$breakpoint-helpers: (
+        "": any,
+        "sm-": sm-and-up,
+        "md-": md-and-up,
+        "lg-": lg-and-up,
+        "xl-": xl-only
+);
+
+$grid-breakpoints: (
+        "xs": 0,
+        "sm": 600px,
+        "md": 960px,
+        "lg": 1280px,
+        "xl": 1920px,
+);
+
+$display-breakpoints: (
+        "xs-only": "only screen and (max-width: #{map-get($grid-breakpoints, "sm") - 0.02})",
+        "sm-only": "only screen and (min-width: #{map-get($grid-breakpoints, "sm")}) and (max-width: #{map-get($grid-breakpoints, "md") - 0.02})",
+        "sm-and-down": "only screen and (max-width: #{map-get($grid-breakpoints, "md") - 0.02})",
+        "sm-and-up": "only screen and (min-width: #{map-get($grid-breakpoints, "sm")})",
+        "md-only": "only screen and (min-width: #{map-get($grid-breakpoints, "md")}) and (max-width: #{map-get($grid-breakpoints, "lg") - 0.02})",
+        "md-and-down": "only screen and (max-width: #{map-get($grid-breakpoints, "lg") - 0.02})",
+        "md-and-up": "only screen and (min-width: #{map-get($grid-breakpoints, "md")})",
+        "lg-only": "only screen and (min-width: #{map-get($grid-breakpoints, "lg")}) and (max-width: #{map-get($grid-breakpoints, "xl") - 0.02})",
+        "lg-and-down": "only screen and (max-width: #{map-get($grid-breakpoints, "xl") - 0.02})",
+        "lg-and-up": "only screen and (min-width: #{map-get($grid-breakpoints, "lg")})",
+        "xl-only": "only screen and (min-width: #{map-get($grid-breakpoints, "xl")})",
+        "any": "only screen",
+);
+
+@mixin xs-only {
+  @media #{map-get($display-breakpoints, 'xs-only')} {
+    @content;
+  }
+}
+@mixin sm-only {
+  @media #{map-get($display-breakpoints, 'sm-only')} {
+    @content;
+  }
+}
+@mixin md-only {
+  @media #{map-get($display-breakpoints, 'md-only')} {
+    @content;
+  }
+}
+@mixin lg-only {
+  @media #{map-get($display-breakpoints, 'lg-only')} {
+    @content;
+  }
+}
+@mixin xl-only {
+  @media #{map-get($display-breakpoints, 'xl-only')} {
+    @content;
+  }
+}
+
+@mixin sm-and-up {
+  @media #{map-get($display-breakpoints, 'sm-and-up')} {
+    @content;
+  }
+}
+
+@mixin md-and-up {
+  @media #{map-get($display-breakpoints, 'md-and-up')} {
+    @content;
+  }
+}
+
+@mixin lg-and-up {
+  @media #{map-get($display-breakpoints, 'lg-and-up')} {
+    @content;
+  }
+}
+
+@mixin sm-and-down {
+  @media #{map-get($display-breakpoints, 'sm-and-down')} {
+    @content;
+  }
+}
+
+@mixin md-and-down {
+  @media #{map-get($display-breakpoints, 'md-and-down')} {
+    @content;
+  }
+}
+
+@mixin lg-and-down {
+  @media #{map-get($display-breakpoints, 'lg-and-down')} {
+    @content;
+  }
+}

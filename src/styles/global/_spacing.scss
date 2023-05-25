@@ -1,0 +1,39 @@
+@import "../variables/breakpoints";
+@import "../variables/spacing";
+
+@each $prop-key, $property in $properties {
+  @each $dir-key, $direction-list in $directions {
+    @each $direction in $direction-list {
+      @for $spacer-step from 1 through $spacers-steps {
+
+        // positive
+        @each $br-key, $breakpoint in $breakpoint-helpers {
+          @media #{map-get($display-breakpoints, $breakpoint)} {
+            .#{$prop-key}#{$dir-key}-#{$br-key}#{$spacer-step} {
+              #{$property}-#{$direction}: $spacer-step * $spacerStepSize;
+            }
+          }
+        }
+
+        // negative
+        @each $br-key, $breakpoint in $breakpoint-helpers {
+          @media #{map-get($display-breakpoints, $breakpoint)} {
+            .#{$prop-key}#{$dir-key}-#{$br-key}n#{$spacer-step} {
+              #{$property}-#{$direction}: -$spacer-step * $spacerStepSize;
+            }
+          }
+        }
+
+      }
+
+      // zero
+      @each $br-key, $breakpoint in $breakpoint-helpers {
+        @media #{map-get($display-breakpoints, $breakpoint)} {
+          .#{$prop-key}#{$dir-key}-#{$br-key}0 {
+            #{$property}-#{$direction}: 0;
+          }
+        }
+      }
+    }
+  }
+}

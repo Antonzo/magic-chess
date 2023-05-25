@@ -1,0 +1,79 @@
+@import "../variables/display";
+@import "../variables/breakpoints";
+
+@each $br-key, $breakpoint in $breakpoint-helpers {
+  @media #{map-get($display-breakpoints, $breakpoint)} {
+    @each $dtype in $displayTypes {
+      @media #{map-get($display-breakpoints, $breakpoint)} {
+        .d-#{$br-key}#{$dtype} {
+          display: $dtype;
+        }
+      }
+    }
+
+    @each $jctype in $justifyContentTypes {
+      @media #{map-get($display-breakpoints, $breakpoint)} {
+        .justify-#{$br-key}#{$jctype} {
+          justify-content: $jctype;
+        }
+      }
+    }
+
+    @each $aitype in $alignItemsTypes {
+      @media #{map-get($display-breakpoints, $breakpoint)} {
+        .align-#{$br-key}#{$aitype} {
+          align-items: $aitype;
+        }
+      }
+    }
+
+
+    @each $fwrap in $flexWrapTypes {
+      @media #{map-get($display-breakpoints, $breakpoint)} {
+        .flex-#{$br-key}#{$fwrap} {
+          flex-wrap: $fwrap;
+        }
+      }
+    }
+
+    @each $fdir in $flexDirectionTypes {
+      @media #{map-get($display-breakpoints, $breakpoint)} {
+        .flex-#{$br-key}#{$fdir} {
+          flex-direction: $fdir;
+        }
+      }
+    }
+
+    @each $as-key, $astype in $alignSelfTypes {
+      @media #{map-get($display-breakpoints, $breakpoint)} {
+        .rounded-#{$br-key}#{$as-key} {
+          align-self: $astype;
+        }
+      }
+    }
+
+    @each $position in $positionTypes {
+      @media #{map-get($display-breakpoints, $breakpoint)} {
+        .position-#{$br-key}#{$position} {
+          position: $position;
+        }
+      }
+    }
+
+    @each $bor-key, $bortype in $borderRadiusTypes {
+      @media #{map-get($display-breakpoints, $breakpoint)} {
+        .rounded-#{$br-key}#{$bor-key} {
+          border-radius: $bortype;
+        }
+      }
+    }
+  }
+}
+
+.full-width {
+  width: 100%;
+}
+
+.full-height {
+  height: 100%;
+}
