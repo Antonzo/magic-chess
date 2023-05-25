@@ -1,6 +1,6 @@
-import {Colors} from "models/Colors";
+import {Colors} from "models/Colors"
 import {Figure} from "models/figures/Figure"
-import {Board} from "models/Board";
+import {Board} from "models/Board"
 
 export class Cell {
     readonly x: number
@@ -134,6 +134,6 @@ export class Cell {
 
     // private methods
     private notifyObservers() {
-        this.observers.forEach(observer => observer(this));
+        this.observers.forEach(observer => observer(this))
     }
 }

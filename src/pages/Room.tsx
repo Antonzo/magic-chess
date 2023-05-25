@@ -30,7 +30,7 @@ function Room() {
     }
 
     // Lost figures pane
-    const [figuresPaneModal, setFiguresPaneModal] = useState(true);
+    const [figuresPaneModal, setFiguresPaneModal] = useState(false)
 
     const handleFiguresPaneToggle = (value: boolean) => {
         setFiguresPaneModal(value)
@@ -55,7 +55,7 @@ function Room() {
             <BoardComponent board={board} />
             <Timer player={board.whitePlayer} />
         </div>
-    );
+    )
 }
 
-export default Room;
+export default Room

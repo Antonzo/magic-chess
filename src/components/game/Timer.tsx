@@ -24,8 +24,8 @@ const Timer: FC<TimerProps> = ({player}) => {
 
     return (
         <div className={`rounded-3 pa-2 ${colorClasses}`}>{formatTime(timeLeft)}</div>
-    );
-};
+    )
+}
 
 
-export default Timer;
+export default Timer

@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC} from 'react'
 
 import "components/base/SlideOutPane.scss"
 
@@ -17,7 +17,7 @@ const SlideOutPane: FC<SlideOutPaneProps> = ({active, toggle, orientation="left"
         <div onClick={handleClick} className={[`slide-out-pane slide-out-pane--${orientation} full-height z-999`, active ? "slide-out-pane--active" : ""].join(" ")}>
             {children}
         </div>
-    );
-};
+    )
+}
 
-export default SlideOutPane;
+export default SlideOutPane

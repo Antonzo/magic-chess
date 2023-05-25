@@ -1,5 +1,5 @@
-import {Colors} from "models/Colors";
-import {Board} from "models/Board";
+import {Colors} from "models/Colors"
+import {Board} from "models/Board"
 
 export class Player {
     color: Colors
@@ -35,13 +35,13 @@ export class Player {
     }
 
     public addObserver(observer: (player: Player) => void) {
-        this.observers.push(observer);
+        this.observers.push(observer)
     }
 
     public removeObserver(observer: (player: Player) => void) {
-        const index = this.observers.indexOf(observer);
+        const index = this.observers.indexOf(observer)
         if (index !== -1) {
-            this.observers.splice(index, 1);
+            this.observers.splice(index, 1)
         }
     }
 
@@ -51,6 +51,6 @@ export class Player {
     }
 
     private notifyObservers() {
-        this.observers.forEach(observer => observer(this));
+        this.observers.forEach(observer => observer(this))
     }
 }

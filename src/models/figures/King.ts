@@ -1,8 +1,8 @@
-import {Figure, FigureNames} from "models/figures/Figure";
-import {Colors} from "models/Colors";
-import {Cell} from "models/Cell";
-import blackLogo from "assets/black-king.png";
-import whiteLogo from "assets/white-king.png";
+import {Figure, FigureNames} from "models/figures/Figure"
+import {Colors} from "models/Colors"
+import {Cell} from "models/Cell"
+import blackLogo from "assets/black-king.png"
+import whiteLogo from "assets/white-king.png"
 
 export class King extends Figure {
     isFirstStep = true
