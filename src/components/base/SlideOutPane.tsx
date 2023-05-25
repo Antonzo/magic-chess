@@ -14,7 +14,7 @@ const SlideOutPane: FC<SlideOutPaneProps> = ({active, toggle, orientation="left"
         toggle(!active)
     }
     return (
-        <div onClick={handleClick} className={[`slide-out-pane slide-out-pane--${orientation} position-absolute full-height z-999`, active ? "slide-out-pane--active" : ""].join(" ")}>
+        <div onClick={handleClick} className={[`slide-out-pane slide-out-pane--${orientation} position-fixed full-height z-999`, active ? "slide-out-pane--active" : ""].join(" ")}>
             {children}
         </div>
     )

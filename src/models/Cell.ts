@@ -92,8 +92,6 @@ export class Cell {
     }
 
     public setAvailable(available: boolean) {
-        if (available)
-            console.log("setAvailable", this.x, this.y)
         this.available = available
         this.notifyObservers()
     }
