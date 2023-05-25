@@ -4,10 +4,10 @@ import Navbar from "components/layout/Navbar"
 
 const Layout = () => {
     return (
-        <>
+        <div className="d-flex flex-column full-height">
             <Navbar />
             <Outlet />
-        </>
+        </div>
     )
 }
 

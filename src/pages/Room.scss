@@ -1,3 +1,6 @@
 .room {
-  gap: 16px;
+  &__content {
+    width: fit-content;
+    gap: 16px;
+  }
 }
