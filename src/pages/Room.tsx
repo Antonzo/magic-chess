@@ -8,9 +8,9 @@ import Button from "components/base/Button"
 
 import {Board} from "models/Board"
 
-import "components/game/Game.scss"
+import "pages/Room.scss"
 
-function Game() {
+function Room() {
     // Board main
     const [board, setBoard] = useState(new Board())
 
@@ -30,35 +30,32 @@ function Game() {
     }
 
     // Lost figures pane
-    const [figuresPaneModal, setFiguresPaneModal] = useState(false);
+    const [figuresPaneModal, setFiguresPaneModal] = useState(true);
 
     const handleFiguresPaneToggle = (value: boolean) => {
         setFiguresPaneModal(value)
     }
 
     return (
-        <div className="game d-flex flex-column align-center justify-center full-width full-height">
-            <div className="game__board-wrapper d-flex flex-column justify-center align-center full-width">
-                <SlideOutPane active={figuresPaneModal} toggle={handleFiguresPaneToggle}>
-                    <p>aa</p>
-                </SlideOutPane>
-                <Button size="large" onClick={onStartClick}>
-                    start
-                </Button>
+        <div className="room d-flex flex-column align-center justify-center full-width full-height">
+            <SlideOutPane active={figuresPaneModal} toggle={handleFiguresPaneToggle}>
                 <LostFigures
                     title="Black figures"
                     figures={board.lostBlackFigures}
                 />
-                <Timer player={board.blackPlayer} />
-                <BoardComponent board={board} />
-                <Timer player={board.whitePlayer} />
                 <LostFigures
                     title="White figures"
                     figures={board.lostWhiteFigures}
                 />
-            </div>
+            </SlideOutPane>
+            <Button size="large" onClick={onStartClick}>
+                start
+            </Button>
+            <Timer player={board.blackPlayer} />
+            <BoardComponent board={board} />
+            <Timer player={board.whitePlayer} />
         </div>
     );
 }
 
-export default Game;
+export default Room;

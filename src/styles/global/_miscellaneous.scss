@@ -1,0 +1,7 @@
+@import "../variables/miscellaneous";
+
+@each $z-ind in $z-indices {
+  .z-#{$z-ind} {
+    z-index: $z-ind;
+  }
+}

@@ -2,3 +2,12 @@
   margin: 0;
   padding: 0;
 }
+
+html {
+  min-height: 100vh;
+  height: 100%;
+}
+
+body, #root {
+    height: 100%;
+}
