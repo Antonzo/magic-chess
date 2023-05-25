@@ -21,7 +21,7 @@ export class Board {
     whitePlayer: Player
     gameInProgress: boolean = false
 
-    constructor(time: number = 300) {
+    constructor(time: number = 5) {
         this.whitePlayer = new Player(Colors.WHITE, this, time)
         this.blackPlayer = new Player(Colors.BLACK, this, time)
         this.initCells()
@@ -118,6 +118,12 @@ export class Board {
         return !!attackArea.includes(king.cell)
     }
 
+    public endGame(loserColor: Colors) {
+        this.gameInProgress = false
+        this.whitePlayer.deactivate()
+        this.blackPlayer.deactivate()
+        alert(`${loserColor} player lost!`)
+    }
     // private methods
     private initCells() {
         for (let i = 0; i < 8; i++) {

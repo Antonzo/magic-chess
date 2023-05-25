@@ -21,7 +21,6 @@ export class Player {
         this.active = true
         this.timer = setInterval(() => {
             this.tick()
-            this.notifyObservers()
         }, 1000) // TODO: try to be closer to the real 1 second
     }
 
@@ -48,6 +47,10 @@ export class Player {
     // private methods
     private tick() {
         this.timeLeft -= 1
+        this.notifyObservers()
+        if (this.timeLeft === 0) {
+            this.board.endGame(this.color)
+        }
     }
 
     private notifyObservers() {
