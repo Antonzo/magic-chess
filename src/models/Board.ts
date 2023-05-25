@@ -31,6 +31,7 @@ export class Board {
     }
 
     public start() {
+        if (this.gameInProgress) return
         this.gameInProgress = true
         this.whitePlayer.activate()
     }

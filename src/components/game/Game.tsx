@@ -42,7 +42,7 @@ function Game() {
                 <SlideOutPane active={figuresPaneModal} toggle={handleFiguresPaneToggle}>
                     <p>aa</p>
                 </SlideOutPane>
-                <Button size="large">
+                <Button size="large" onClick={onStartClick}>
                     start
                 </Button>
                 <LostFigures
