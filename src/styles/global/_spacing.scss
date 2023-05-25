@@ -34,6 +34,15 @@
           }
         }
       }
+
+      // auto
+      @each $br-key, $breakpoint in $breakpoint-helpers {
+        @media #{map-get($display-breakpoints, $breakpoint)} {
+          .#{$prop-key}#{$dir-key}-#{$br-key}auto {
+            #{$property}-#{$direction}: auto;
+          }
+        }
+      }
     }
   }
 }

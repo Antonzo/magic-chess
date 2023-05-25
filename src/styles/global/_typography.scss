@@ -56,3 +56,9 @@ h6 {
 .font-light {
   @include font-light;
 }
+
+@each $ta in $textAlignments {
+  .text-#{$ta} {
+    text-align: $ta;
+  }
+}

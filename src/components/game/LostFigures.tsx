@@ -17,7 +17,7 @@ const LostFigures: FC<lostFiguresProps> = ({title, figures}) => {
                 </div>
             )}
         </div>
-    );
-};
+    )
+}
 
-export default LostFigures;
+export default LostFigures

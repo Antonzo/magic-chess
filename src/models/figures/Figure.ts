@@ -1,6 +1,6 @@
 import logo from 'assets/black-king.png'
-import {Colors} from "models/Colors";
-import {Cell} from "models/Cell";
+import {Colors} from "models/Colors"
+import {Cell} from "models/Cell"
 
 export enum FigureNames {
     FIGURE = "Figure",

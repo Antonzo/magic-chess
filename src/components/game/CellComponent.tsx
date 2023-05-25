@@ -40,7 +40,7 @@ const CellComponent: FC<CellProps> = ({cell, selected, click}) => {
             {cellAvailable && !cellFigure && <div className="cell__step-indicator rounded-circle bg-color-chess-selected" />}
             {cellFigure?.logo && <img className="cell__figure-logo position-relative" src={cellFigure.logo} draggable="false" alt="" />}
         </div>
-    );
-};
+    )
+}
 
-export default CellComponent;
+export default CellComponent

@@ -8,7 +8,7 @@ interface ButtonProps {
     disabled?: boolean,
     ripple?: boolean,
     children?: React.ReactNode
-    onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
+    onClick?: (event: MouseEvent<HTMLButtonElement>) => void
 }
 const Button: FC<ButtonProps> = ({
     disabled = false,
@@ -34,7 +34,7 @@ const Button: FC<ButtonProps> = ({
                 {children}
             </span>
         </button>
-    );
-};
+    )
+}
 
 export default Button

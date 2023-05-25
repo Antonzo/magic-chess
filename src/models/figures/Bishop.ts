@@ -1,6 +1,6 @@
-import {Figure, FigureNames} from "models/figures/Figure";
-import {Colors} from "models/Colors";
-import {Cell} from "models/Cell";
+import {Figure, FigureNames} from "models/figures/Figure"
+import {Colors} from "models/Colors"
+import {Cell} from "models/Cell"
 import blackLogo from "assets/black-bishop.png"
 import whiteLogo from "assets/white-bishop.png"
 

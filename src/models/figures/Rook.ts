@@ -1,8 +1,8 @@
-import {Figure, FigureNames} from "models/figures/Figure";
-import {Colors} from "models/Colors";
-import {Cell} from "models/Cell";
-import blackLogo from "assets/black-rook.png";
-import whiteLogo from "assets/white-rook.png";
+import {Figure, FigureNames} from "models/figures/Figure"
+import {Colors} from "models/Colors"
+import {Cell} from "models/Cell"
+import blackLogo from "assets/black-rook.png"
+import whiteLogo from "assets/white-rook.png"
 
 export class Rook extends Figure {
     isFirstStep = false

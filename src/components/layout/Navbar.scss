@@ -1,0 +1,10 @@
+.navbar {
+  &__list {
+    list-style-type: none;
+    gap: 8px;
+  }
+  &__link {
+    text-decoration: none;
+    color: inherit;
+  }
+}

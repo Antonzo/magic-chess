@@ -58,7 +58,7 @@
 
 @mixin text-large {
   font-size: 1.07em;
-  padding-bottom: 0px;
+  padding-bottom: 0;
   line-height: 1.25em;
   color: inherit;
   letter-spacing: -0.03em;
@@ -73,7 +73,7 @@
 
 @mixin text-regular {
   font-size: 1em;
-  padding-bottom: 0px;
+  padding-bottom: 0;
   line-height: 1.25em;
   color: inherit;
   letter-spacing: -0.03em;
@@ -87,7 +87,7 @@
 
 @mixin text-small {
   font-size: 0.933em;
-  padding-bottom: 0px;
+  padding-bottom: 0;
   line-height: 1.25em;
   color: inherit;
   letter-spacing: -0.03em;
@@ -101,7 +101,7 @@
 
 @mixin text-detail {
   font-size: 0.8em;
-  padding-bottom: 0px;
+  padding-bottom: 0;
   line-height: 1.25em;
   color: inherit;
   letter-spacing: -0.03em;
@@ -124,3 +124,5 @@
 @mixin font-light {
   font-weight: 300;
 }
+
+$textAlignments: left center right;

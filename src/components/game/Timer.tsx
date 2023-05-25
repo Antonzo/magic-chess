@@ -23,9 +23,9 @@ const Timer: FC<TimerProps> = ({player}) => {
     const colorClasses = player.color === 'black' ? 'bg-grey-6 white' : 'bg-grey-2 black'
 
     return (
-        <div className={`rounded-3 pa-2 ${colorClasses}`}>{formatTime(timeLeft)}</div>
-    );
-};
+        <div className={`rounded-2 pa-2 text-center ${colorClasses}`}>{formatTime(timeLeft)}</div>
+    )
+}
 
 
-export default Timer;
+export default Timer
