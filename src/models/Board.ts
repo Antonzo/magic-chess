@@ -21,7 +21,7 @@ export class Board {
     whitePlayer: Player
     gameInProgress: boolean = false
 
-    constructor(time: number = 5) {
+    constructor(time: number = 300) {
         this.whitePlayer = new Player(Colors.WHITE, this, time)
         this.blackPlayer = new Player(Colors.BLACK, this, time)
         this.initCells()
@@ -40,17 +40,6 @@ export class Board {
         if (this.whitePlayer.isActive()) return this.whitePlayer
         if (this.blackPlayer.isActive()) return this.blackPlayer
         return null
-    }
-
-    public swapPlayers() {
-        if (this.whitePlayer.isActive()) {
-            this.whitePlayer.deactivate()
-            this.blackPlayer.activate()
-        }
-        else {
-            this.blackPlayer.deactivate()
-            this.whitePlayer.activate()
-        }
     }
 
     public highlightCells(selectedCell: Cell | null) {
@@ -75,40 +64,22 @@ export class Board {
 
     public calculateAttackAreasWhite(ignoreCheck: boolean = false) {
         this.cellsUnderWhiteAttack = []
-        let whiteFigures: Figure[] = []
         this.cells.forEach(row =>
             row.forEach(cell => {
-                if (cell.figure?.color === Colors.WHITE)
-                    whiteFigures.push(cell.figure)
+                if (cell.figure?.color === Colors.WHITE && cell.figure.canMove(cell, ignoreCheck))
+                    this.cellsUnderWhiteAttack.push(cell)
             })
         )
-        whiteFigures.forEach(figure => {
-            this.cells.forEach(row =>
-                row.forEach(cell => {
-                    if (figure.canMove(cell, ignoreCheck))
-                        this.cellsUnderWhiteAttack.push(cell)
-                })
-            )
-        })
     }
 
     public calculateAttackAreasBlack(ignoreCheck: boolean = false) {
         this.cellsUnderBlackAttack = []
-        let blackFigures: Figure[] = []
         this.cells.forEach(row =>
             row.forEach(cell => {
-                if (cell.figure?.color === Colors.BLACK)
-                    blackFigures.push(cell.figure)
+                if (cell.figure?.color === Colors.BLACK && cell.figure.canMove(cell, ignoreCheck))
+                    this.cellsUnderBlackAttack.push(cell)
             })
         )
-        blackFigures.forEach(figure => {
-            this.cells.forEach(row =>
-                row.forEach(cell => {
-                    if (figure.canMove(cell, ignoreCheck))
-                        this.cellsUnderBlackAttack.push(cell)
-                })
-            )
-        })
     }
 
     public isKingUnderAttack(color: Colors): boolean {
@@ -118,12 +89,36 @@ export class Board {
         return !!attackArea.includes(king.cell)
     }
 
-    public endGame(loserColor: Colors) {
+    public endGame(loser: Player | null) {
         this.gameInProgress = false
         this.whitePlayer.deactivate()
         this.blackPlayer.deactivate()
-        alert(`${loserColor} player lost!`)
+        return loser
     }
+
+    public changeGameState(): boolean {
+        this.swapPlayers()
+        if (this.isStalemate(Colors.WHITE)) {
+            if (this.isKingUnderAttack(Colors.WHITE)) {
+                this.endGame(this.whitePlayer)
+                console.log("checkmate//WHITE")
+            }
+            this.endGame(null)
+            console.log("stalemate//WHITE")
+            // return true
+        }
+        if (this.isStalemate(Colors.BLACK)) {
+            if (this.isKingUnderAttack(Colors.BLACK)) {
+                this.endGame(this.blackPlayer)
+                console.log("checkmate//BLACK")
+            }
+            this.endGame(null)
+            console.log("stalemate//BLACK")
+            // return true
+        }
+        return false
+    }
+
     // private methods
     private initCells() {
         for (let i = 0; i < 8; i++) {
@@ -176,5 +171,29 @@ export class Board {
     private addQueens() {
         new Queen(Colors.BLACK, this.getCell(3, 0))
         new Queen(Colors.WHITE, this.getCell(3, 7))
+    }
+
+    private isStalemate(color: Colors): boolean {
+        console.log("isStalemate", color)
+        this.cells.forEach(row =>
+            row.forEach(cell => {
+                if (cell.figure?.color === color)
+                    console.log(cell.figure.name, cell.figure.canMove(cell, true))
+                if (cell.figure?.color === color && cell.figure.canMove(cell, true))
+                   return false
+            })
+        )
+        return true
+    }
+
+    private swapPlayers() {
+        if (this.whitePlayer.isActive()) {
+            this.whitePlayer.deactivate()
+            this.blackPlayer.activate()
+        }
+        else {
+            this.blackPlayer.deactivate()
+            this.whitePlayer.activate()
+        }
     }
 }
