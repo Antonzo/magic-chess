@@ -36,6 +36,6 @@ export class Figure {
 
     moveFigure(target: Cell) {
         if (!target.board.gameInProgress) return
-        console.log("changeGameState", target.board.changeGameState())
+        target.board.changeGameState(this.color)
     }
 }
