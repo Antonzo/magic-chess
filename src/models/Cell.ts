@@ -115,10 +115,11 @@ export class Cell {
         this.figure.cell = target
         target.figure = this.figure
         this.figure = null
+        const ignoreFigures = targetFigure ? [targetFigure] : []
         if (target.figure.color === Colors.WHITE)
-            target.board.calculateAttackAreasBlack(true)
+            target.board.calculateAttackAreasBlack(true, ignoreFigures)
         else
-            target.board.calculateAttackAreasWhite(true)
+            target.board.calculateAttackAreasWhite(true, ignoreFigures)
         const isKingUnderAttack = target.board.isKingUnderAttack(target.figure.color)
         this.figure = target.figure
         this.figure.cell = this

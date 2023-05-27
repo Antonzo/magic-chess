@@ -80,9 +80,9 @@ export class Board {
         }
     }
 
-    public calculateAttackAreasWhite(ignoreCheck: boolean = false) {
+    public calculateAttackAreasWhite(ignoreCheck: boolean = false, ignoreFigures: Figure[] = []) {
         this.cellsUnderWhiteAttack = []
-        this.activeWhiteFigures.forEach(figure => {
+        this.activeWhiteFigures.filter(figure => !ignoreFigures.includes(figure)).forEach(figure => {
             this.cells.forEach(row =>
                 row.forEach(cell => {
                     if (figure.canMove(cell, ignoreCheck))
@@ -92,9 +92,9 @@ export class Board {
         })
     }
 
-    public calculateAttackAreasBlack(ignoreCheck: boolean = false) {
+    public calculateAttackAreasBlack(ignoreCheck: boolean = false, ignoreFigures: Figure[] = []) {
         this.cellsUnderBlackAttack = []
-        this.activeBlackFigures.forEach(figure => {
+        this.activeBlackFigures.filter(figure => !ignoreFigures.includes(figure)).forEach(figure => {
             this.cells.forEach(row =>
                 row.forEach(cell => {
                     if (figure.canMove(cell, ignoreCheck))
