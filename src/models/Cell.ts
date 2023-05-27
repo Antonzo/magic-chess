@@ -92,22 +92,20 @@ export class Cell {
     }
 
     public setAvailable(available: boolean) {
-        if (available)
-            console.log("setAvailable", this.x, this.y)
         this.available = available
         this.notifyObservers()
     }
 
     public moveFigure(target: Cell) {
-        if (this.figure && this.figure.canMove(target)) {
+        const currentPlayerColor = this.board.getActivePlayer()?.color
+        if (currentPlayerColor && this.figure && this.figure.canMove(target)) {
             this.figure?.moveFigure(target)
             if (target.figure) {
-                this.board.addLostFigure(target.figure)
+                this.board.killFigure(target.figure)
             }
             target.setFigure(this.figure)
             this.figure = null
-            this.board.calculateAttackAreasWhite()
-            this.board.calculateAttackAreasBlack()
+            this.board.changeGameState(currentPlayerColor)
         }
     }
 
@@ -117,10 +115,11 @@ export class Cell {
         this.figure.cell = target
         target.figure = this.figure
         this.figure = null
+        const ignoreFigures = targetFigure ? [targetFigure] : []
         if (target.figure.color === Colors.WHITE)
-            target.board.calculateAttackAreasBlack(true)
+            target.board.calculateAttackAreasBlack(true, ignoreFigures)
         else
-            target.board.calculateAttackAreasWhite(true)
+            target.board.calculateAttackAreasWhite(true, ignoreFigures)
         const isKingUnderAttack = target.board.isKingUnderAttack(target.figure.color)
         this.figure = target.figure
         this.figure.cell = this

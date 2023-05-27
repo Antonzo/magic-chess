@@ -13,4 +13,15 @@
     max-height: 25px;
     max-width: 25px;
   }
+
+  &__label {
+    &--number {
+      top: 3px;
+      left: 3px;
+    }
+    &--letter {
+      bottom: 3px;
+      right: 3px;
+    }
+  }
 }

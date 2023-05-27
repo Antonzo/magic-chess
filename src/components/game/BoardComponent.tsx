@@ -25,13 +25,8 @@ const BoardComponent: FC<BoardProps> = ({board}) => {
     }
 
     useEffect(() => {
-        highlightCells()
-    }, [selectedCell])
-
-    function highlightCells() {
         board.highlightCells(selectedCell)
-    }
-
+    }, [selectedCell, board])
 
     return (
         <div className="board">

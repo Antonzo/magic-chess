@@ -1,6 +1,8 @@
 import React, {FC, useEffect, useState} from 'react'
 import {Cell} from "models/Cell"
+import {indexToChessLetter, indexToChessNumber} from "utils/mappings"
 import "components/game/CellComponent.scss"
+import {Colors} from "../../models/Colors";
 
 interface CellProps {
     cell: Cell
@@ -23,22 +25,26 @@ const CellComponent: FC<CellProps> = ({cell, selected, click}) => {
         }
     }, [cell])
 
-    function getColorClass() {
+    const colorClass= (function () {
         if (cellAvailable && cellFigure)
-            return 'bg-color-chess-available'
+            return 'color-chess-available'
         if (selected)
-            return 'bg-color-chess-selected'
-        return `bg-color-chess-${cell.color}`
-    }
+            return 'color-chess-selected'
+        return `color-chess-${cell.color}`
+    })()
+
+    const colorClassOpposite = cell.color === Colors.WHITE ? 'color-chess-black' : 'color-chess-white'
 
 
     return (
         <div
-            className={['cell d-flex justify-center align-center full-width', getColorClass()].join(" ")}
+            className={`cell position-relative d-flex justify-center align-center full-width bg-${colorClass}`}
             onClick={() => click(cell)}
         >
             {cellAvailable && !cellFigure && <div className="cell__step-indicator rounded-circle bg-color-chess-selected" />}
-            {cellFigure?.logo && <img className="cell__figure-logo position-relative" src={cellFigure.logo} draggable="false" alt="" />}
+            {cellFigure?.logo && <img className="cell__figure-logo position-relative z-1" src={cellFigure.logo} draggable="false" alt={`${cellFigure.color} ${cellFigure.name} logo`} />}
+            {cell.x === 0 && <p className={`position-absolute font-bold cell__label--number ${colorClassOpposite}`}>{indexToChessNumber(cell.y)}</p> }
+            {cell.y === 7 && <p className={`position-absolute font-bold cell__label--letter ${colorClassOpposite}`}>{indexToChessLetter(cell.x)}</p> }
         </div>
     )
 }

@@ -1,12 +1,23 @@
+@import "../../styles/variables/breakpoints";
+
 .slide-out-pane {
     top: 0;
-    width: 30%;
+    width: 100%;
     overflow-y: auto;
     background-color: rgba(0, 0, 0);
     transition: all 0.3s ease-in-out;
+    @include sm-and-up {
+        width: 50%;
+    }
+    @include md-and-up {
+        width: 40%;
+    }
+    @include lg-and-up {
+        width: 30%;
+    }
     &--left {
         left: 0;
-        transform: translateX(-100%);
+        transform: translateX(-101%);
 
         &.slide-out-pane--active {
             transform: translateX(0);
@@ -14,7 +25,7 @@
     }
     &--right {
         right: 0;
-        transform: translateX(100%);
+        transform: translateX(101%);
 
         &.slide-out-pane--active {
             transform: translateX(0);
