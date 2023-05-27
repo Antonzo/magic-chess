@@ -97,15 +97,15 @@ export class Cell {
     }
 
     public moveFigure(target: Cell) {
-        if (this.figure && this.figure.canMove(target)) {
+        const currentPlayerColor = this.board.getActivePlayer()?.color
+        if (currentPlayerColor && this.figure && this.figure.canMove(target)) {
             this.figure?.moveFigure(target)
             if (target.figure) {
-                this.board.addLostFigure(target.figure)
+                this.board.killFigure(target.figure)
             }
             target.setFigure(this.figure)
             this.figure = null
-            this.board.calculateAttackAreasWhite()
-            this.board.calculateAttackAreasBlack()
+            this.board.changeGameState(currentPlayerColor)
         }
     }
 

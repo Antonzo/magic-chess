@@ -49,7 +49,7 @@ export class Player {
         this.timeLeft -= 1
         this.notifyObservers()
         if (this.timeLeft === 0) {
-            this.board.endGame(this)
+            this.board.endGame(this.color)
         }
     }
 

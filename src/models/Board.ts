@@ -1,5 +1,6 @@
 import {Cell} from "models/Cell"
 import {Colors} from "models/Colors"
+import {GameOutcome} from "models/GameOutcome"
 import {Pawn} from "models/figures/Pawn"
 import {King} from "models/figures/King"
 import {Queen} from "models/figures/Queen"
@@ -13,6 +14,8 @@ export class Board {
     cells: Cell[][] = []
     cellsUnderWhiteAttack: Cell[] = []
     cellsUnderBlackAttack: Cell[] = []
+    activeBlackFigures: Figure[] = []
+    activeWhiteFigures: Figure[] = []
     lostBlackFigures: Figure[] = []
     lostWhiteFigures: Figure[] = []
     blackKing: King
@@ -28,6 +31,7 @@ export class Board {
         this.blackKing = new King(Colors.BLACK, this.getCell(4, 0))
         this.whiteKing = new King(Colors.WHITE, this.getCell(4, 7))
         this.addFigures()
+        this.initActiveFigures()
     }
 
     public start() {
@@ -42,8 +46,8 @@ export class Board {
         return null
     }
 
-    public swapPlayers(movedFigureColor: Colors) {
-        if (movedFigureColor === Colors.WHITE) {
+    public swapPlayers(currentPlayerColor: Colors) {
+        if (currentPlayerColor === Colors.WHITE) {
             this.whitePlayer.deactivate()
             this.blackPlayer.activate()
         } else {
@@ -66,22 +70,19 @@ export class Board {
         return this.cells[y][x]
     }
 
-    public addLostFigure(figure: Figure) {
-        figure.color === Colors.BLACK
-            ? this.lostBlackFigures.push(figure)
-            : this.lostWhiteFigures.push(figure)
+    public killFigure(figure: Figure) {
+        if (figure.color === Colors.BLACK) {
+            this.lostBlackFigures.push(figure)
+            this.activeBlackFigures = this.activeBlackFigures.filter(f => f.id !== figure.id)
+        } else {
+            this.lostWhiteFigures.push(figure)
+            this.activeWhiteFigures = this.activeWhiteFigures.filter(f => f.id !== figure.id)
+        }
     }
 
     public calculateAttackAreasWhite(ignoreCheck: boolean = false) {
         this.cellsUnderWhiteAttack = []
-        let whiteFigures: Figure[] = []
-        this.cells.forEach(row =>
-            row.forEach(cell => {
-                if (cell.figure?.color === Colors.WHITE)
-                    whiteFigures.push(cell.figure)
-            })
-        )
-        whiteFigures.forEach(figure => {
+        this.activeWhiteFigures.forEach(figure => {
             this.cells.forEach(row =>
                 row.forEach(cell => {
                     if (figure.canMove(cell, ignoreCheck))
@@ -93,14 +94,7 @@ export class Board {
 
     public calculateAttackAreasBlack(ignoreCheck: boolean = false) {
         this.cellsUnderBlackAttack = []
-        let blackFigures: Figure[] = []
-        this.cells.forEach(row =>
-            row.forEach(cell => {
-                if (cell.figure?.color === Colors.BLACK)
-                    blackFigures.push(cell.figure)
-            })
-        )
-        blackFigures.forEach(figure => {
+        this.activeBlackFigures.forEach(figure => {
             this.cells.forEach(row =>
                 row.forEach(cell => {
                     if (figure.canMove(cell, ignoreCheck))
@@ -117,35 +111,23 @@ export class Board {
         return !!attackArea.includes(king.cell)
     }
 
-    public endGame(loser: Player | null) {
+    public endGame(outcome: GameOutcome) {
         this.gameInProgress = false
         this.whitePlayer.deactivate()
         this.blackPlayer.deactivate()
-        return loser
+        alert(`Game over! ${outcome}`) // TODO: proper logic
+        return outcome
     }
 
-    public changeGameState(movedFigureColor: Colors): boolean {
-        this.swapPlayers(movedFigureColor)
-        console.log("changeGameState//0", movedFigureColor, this.cellsUnderWhiteAttack.length, this.cellsUnderWhiteAttack)
-        if (movedFigureColor === Colors.BLACK && this.cellsUnderWhiteAttack.length === 0) {
-            if (this.isKingUnderAttack(Colors.WHITE)) {
-                this.endGame(this.whitePlayer)
-                console.log("checkmate//WHITE")
-            }
-            this.endGame(null)
-            console.log("stalemate//WHITE")
-            return true
-        }
-        if (movedFigureColor === Colors.WHITE && this.cellsUnderBlackAttack.length === 0) {
-            if (this.isKingUnderAttack(Colors.BLACK)) {
-                this.endGame(this.blackPlayer)
-                console.log("checkmate//BLACK")
-            }
-            this.endGame(null)
-            console.log("stalemate//BLACK")
-            return true
-        }
-        return false
+    public changeGameState(currentPlayerColor: Colors): void {
+        if (currentPlayerColor === Colors.WHITE)
+            this.calculateAttackAreasBlack()
+        else
+            this.calculateAttackAreasWhite()
+        this.swapPlayers(currentPlayerColor)
+        const gameStatus = this.endGameStatus(currentPlayerColor)
+        if (gameStatus !== null)
+            this.endGame(gameStatus)
     }
     // private methods
     private initCells() {
@@ -199,5 +181,33 @@ export class Board {
     private addQueens() {
         new Queen(Colors.BLACK, this.getCell(3, 0))
         new Queen(Colors.WHITE, this.getCell(3, 7))
+    }
+
+    private initActiveFigures() {
+        this.cells.forEach(row =>
+            row.forEach(cell => {
+                if (cell.figure) {
+                    cell.figure.color === Colors.WHITE
+                        ? this.activeWhiteFigures.push(cell.figure)
+                        : this.activeBlackFigures.push(cell.figure)
+                }
+            })
+        )
+    }
+
+    private endGameStatus(currentPlayerColor: Colors): GameOutcome | null {
+        if (currentPlayerColor === Colors.BLACK && this.cellsUnderWhiteAttack.length === 0) {
+            if (this.isKingUnderAttack(Colors.WHITE)) {
+                return Colors.WHITE
+            }
+            return "draw"
+        }
+        if (currentPlayerColor === Colors.WHITE && this.cellsUnderBlackAttack.length === 0) {
+            if (this.isKingUnderAttack(Colors.BLACK)) {
+                return Colors.BLACK
+            }
+            return "draw"
+        }
+        return null
     }
 }

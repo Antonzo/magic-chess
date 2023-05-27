@@ -45,7 +45,6 @@ const CellComponent: FC<CellProps> = ({cell, selected, click}) => {
             {cellFigure?.logo && <img className="cell__figure-logo position-relative z-1" src={cellFigure.logo} draggable="false" alt={`${cellFigure.color} ${cellFigure.name} logo`} />}
             {cell.x === 0 && <p className={`position-absolute font-bold cell__label--number ${colorClassOpposite}`}>{indexToChessNumber(cell.y)}</p> }
             {cell.y === 7 && <p className={`position-absolute font-bold cell__label--letter ${colorClassOpposite}`}>{indexToChessLetter(cell.x)}</p> }
-
         </div>
     )
 }
