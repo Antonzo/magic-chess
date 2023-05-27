@@ -9,6 +9,7 @@ import {Rook} from "models/figures/Rook"
 import {Knight} from "models/figures/Knight"
 import {Figure} from "models/figures/Figure"
 import {Player} from "models/Player"
+import {Spell} from "models/spells/Spell"
 
 export class Board {
     cells: Cell[][] = []
@@ -23,6 +24,7 @@ export class Board {
     blackPlayer: Player
     whitePlayer: Player
     gameInProgress: boolean = false
+    activeSpells: Spell[] = []
 
     constructor(time: number = 300) {
         this.whitePlayer = new Player(Colors.WHITE, this, time)
@@ -71,6 +73,7 @@ export class Board {
     }
 
     public killFigure(figure: Figure) {
+        figure.cell.figure = null
         if (figure.color === Colors.BLACK) {
             this.lostBlackFigures.push(figure)
             this.activeBlackFigures = this.activeBlackFigures.filter(f => f.id !== figure.id)
@@ -126,7 +129,7 @@ export class Board {
             this.calculateAttackAreasWhite()
         this.swapPlayers(currentPlayerColor)
         const gameStatus = this.endGameStatus(currentPlayerColor)
-        if (gameStatus !== null)
+        if (gameStatus)
             this.endGame(gameStatus)
     }
     // private methods

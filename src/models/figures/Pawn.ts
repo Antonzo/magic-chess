@@ -1,8 +1,8 @@
 import {Figure, FigureNames} from "models/figures/Figure"
 import {Colors} from "models/Colors"
 import {Cell} from "models/Cell"
-import blackLogo from "assets/black-pawn.png"
-import whiteLogo from "assets/white-pawn.png"
+import blackLogo from "assets/figures/black-pawn.png"
+import whiteLogo from "assets/figures/white-pawn.png"
 
 export class Pawn extends Figure {
 

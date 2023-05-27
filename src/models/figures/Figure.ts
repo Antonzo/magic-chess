@@ -1,4 +1,4 @@
-import logo from 'assets/black-king.png'
+import logo from 'assets/figures/black-king.png'
 import {Colors} from "models/Colors"
 import {Cell} from "models/Cell"
 
