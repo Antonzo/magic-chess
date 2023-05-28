@@ -8,7 +8,7 @@ export class Poison extends FigureSpell {
     static spellName: string = "Poison"
 
     constructor(caster: Player, figure: Figure) {
-        super(caster, figure, SpellPhases.AFTER, SpellTargets.ENEMY, 4)
+        super(caster, figure, SpellPhases.AFTER, SpellTargets.ENEMY, 9)
         this.affectedEntity = figure
     }
 }
