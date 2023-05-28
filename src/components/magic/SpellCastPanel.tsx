@@ -32,6 +32,7 @@ const SpellCastPanel: FC<SpellCastingPanelProps> = ({
                 <SpellLogo
                     key={spellMeta.id}
                     spellMeta={spellMeta}
+                    size={logoSize}
                     className="spell-casting-panel__logo"
                     blockCast={blockCast}
                     onCast={() => handleClick(spellMeta)}
