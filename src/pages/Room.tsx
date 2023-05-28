@@ -5,6 +5,8 @@ import LostFigures from "components/game/LostFigures"
 import Timer from "components/game/Timer"
 import SlideOutPane from "components/base/SlideOutPane"
 import Button from "components/base/Button"
+import SpellList from "components/magic/SpellList"
+
 import armageddon from "assets/magic/armageddon-spell.png"
 import astralStep from "assets/magic/astral-step-spell.png"
 import poison from "assets/magic/poison-effect.png"
@@ -26,6 +28,7 @@ import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled'
 import {Armageddon} from "models/magic/spells/Armageddon"
 import {SpellFactory} from "models/magic/SpellFactory"
 import {Game} from "models/game/Game"
+import {spellMetaList} from "models/magic/settings/settings1"
 
 import "pages/Room.scss"
 
@@ -41,7 +44,9 @@ function Room() {
 
     function initGame() {
         const newGame = new Game()
+        spellFactory.load(spellMetaList)
         setGame(newGame)
+        setSpellFactory(spellFactory)
     }
 
     // TODO: create proper start game logic
@@ -76,7 +81,7 @@ function Room() {
                 />
             </SlideOutPane>
             <SlideOutPane active={spellsPaneModal} orientation="right" toggle={handleSpellsPaneToggle}>
-                <p>Spells pane</p>
+                <SpellList spellsMeta={spellFactory.spellsMeta} />
             </SlideOutPane>
             <div className="room__content d-flex flex-column">
                 <div className="d-flex justify-space-between full-width">

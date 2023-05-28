@@ -1,4 +1,4 @@
-import { SpellFactory, ISpellMeta } from "models/magic/SpellFactory"
+import { ISpellMeta } from "models/magic/SpellFactory"
 import {Armageddon} from "models/magic/spells/Armageddon"
 
 const ArmageddonSettings: ISpellMeta<Armageddon> = {
@@ -6,13 +6,9 @@ const ArmageddonSettings: ISpellMeta<Armageddon> = {
     cooldown: 8,
     cost: 15,
     amount: 1,
+    id: Math.random()
 }
 
+const spellMetaList = [ArmageddonSettings]
 
-function getSpellFactory() {
-    const spellFactory = new SpellFactory()
-    spellFactory.push(ArmageddonSettings)
-    return spellFactory
-}
-
-export { getSpellFactory }
+export { spellMetaList }

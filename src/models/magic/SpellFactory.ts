@@ -5,6 +5,7 @@ export interface ISpellMeta<T extends Spell> {
     cooldown: number
     cost: number
     amount: number
+    id: number // For react keys
 }
 
 export class SpellFactory {
@@ -18,6 +19,10 @@ export class SpellFactory {
 
     push<T extends Spell>(spellMeta: ISpellMeta<T>) {
         this.spellsMeta.push(spellMeta)
+    }
+
+    load<T extends Spell>(spellMeta: ISpellMeta<T>[]) {
+        spellMeta.forEach(spellMeta => this.push(spellMeta))
     }
 
     create<T extends Spell>(spellConstructor: (new (...args: any[]) => T), ...args: any[]) {
