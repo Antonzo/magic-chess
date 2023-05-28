@@ -1,17 +1,17 @@
 import {Colors} from "models/game/Colors"
-import {Board} from "models/game/Board"
+import {Game} from "models/game/Game"
 
 export class Player {
     color: Colors
-    board: Board
+    game: Game
     active: boolean
     timeLeft: number
     private timer: ReturnType<typeof setInterval> | null = null
     private observers: ((player: Player) => void)[] = []
 
-    constructor(color: Colors, board: Board, time: number) {
+    constructor(color: Colors, game: Game, time: number) {
         this.color = color
-        this.board = board
+        this.game = game
         this.timeLeft = time
         this.active = false
     }
@@ -49,7 +49,7 @@ export class Player {
         this.timeLeft -= 1
         this.notifyObservers()
         if (this.timeLeft === 0) {
-            this.board.endGame(this.color)
+            this.game.endGame(this.color)
         }
     }
 

@@ -1,7 +1,7 @@
 import logo from 'assets/figures/black-king.png'
 import {Figure} from "models/figures/Figure"
 import {Cell} from "models/game/Cell"
-import {Board} from "models/game/Board"
+import {Game} from "models/game/Game"
 
 export enum SpellNames {
     SPELL = "Spell",
@@ -14,11 +14,11 @@ export enum SpellPhases {
     BEFORE_MOVE = "Before move",
 }
 
-type AffectedEntityType = Board | Cell[] | Cell | Figure
+type AffectedEntityType = Game | Cell[] | Cell | Figure
 
 export class Spell {
     affectedEntity: AffectedEntityType
-    board: Board
+    board: Game
     phase: SpellPhases
     logo: typeof logo | null
     duration: number
@@ -26,7 +26,7 @@ export class Spell {
     name: SpellNames
     id: number
 
-    constructor(board: Board, affectedEntity: AffectedEntityType, phase: SpellPhases, duration: number) {
+    constructor(board: Game, affectedEntity: AffectedEntityType, phase: SpellPhases, duration: number) {
         this.board = board
         this.affectedEntity = affectedEntity
         this.phase = phase

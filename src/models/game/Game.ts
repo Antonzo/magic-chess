@@ -11,7 +11,7 @@ import {Figure} from "models/figures/Figure"
 import {Player} from "models/game/Player"
 import {Spell} from "models/magic/Spell"
 
-export class Board {
+export class Game {
     cells: Cell[][] = []
     cellsUnderWhiteAttack: Cell[] = []
     cellsUnderBlackAttack: Cell[] = []

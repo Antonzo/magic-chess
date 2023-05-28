@@ -5,19 +5,30 @@ import LostFigures from "components/game/LostFigures"
 import Timer from "components/game/Timer"
 import SlideOutPane from "components/base/SlideOutPane"
 import Button from "components/base/Button"
+import armageddon from "assets/magic/armageddon-spell.png"
+import astralStep from "assets/magic/astral-step-spell.png"
+import poison from "assets/magic/poison-effect.png"
+import frozenSoul from "assets/magic/frozen-soul-effect.png"
+import holyShield from "assets/magic/holy-shield-effect.png"
+import chronoStamp from "assets/magic/chrono-stamp-effect.png"
+import blessing from "assets/magic/blessing-effect.png"
+import torrentialSurge from "assets/magic/torrential-surge-spell.png"
+import shadowStep from "assets/magic/shadow-step-effect.png"
+import naturalGrowth from "assets/magic/natural-growth-spell.png"
+import phoenixBarrier from "assets/magic/phoenix-barrier-effect.png"
+import paranormalArea from "assets/magic/paranormal-area-effect.png"
 
-// import { FortIcon } from '@mui/icons-material'
 import FortIcon from '@mui/icons-material/Fort'
 import WavingHandIcon from '@mui/icons-material/WavingHand'
 import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled'
 
-import {Board} from "models/game/Board"
+import {Game} from "models/game/Game"
 
 import "pages/Room.scss"
 
 function Room() {
     // Board main
-    const [board, setBoard] = useState(new Board())
+    const [board, setBoard] = useState(new Game())
 
     useEffect(() => {
         initGame()
@@ -25,7 +36,7 @@ function Room() {
 
 
     function initGame() {
-        const newBoard = new Board()
+        const newBoard = new Game()
         setBoard(newBoard)
     }
 
@@ -78,6 +89,20 @@ function Room() {
                 <Timer player={board.blackPlayer} />
                 <BoardComponent board={board} />
                 <Timer player={board.whitePlayer} />
+            </div>
+            <div className="d-flex align-center justify-center">
+                <img src={armageddon} alt="armageddon" className="rounded-circle overflow-hidden" width={70} height={70} />
+                <img src={astralStep} alt="atral-step" className="rounded-circle overflow-hidden" width={70} height={70} />
+                <img src={poison} alt="poison" className="rounded-circle overflow-hidden" width={70} height={70} />
+                <img src={frozenSoul} alt="frozen-soul" className="rounded-circle overflow-hidden" width={70} height={70} />
+                <img src={holyShield} alt="holy-shield" className="rounded-circle overflow-hidden" width={70} height={70} />
+                <img src={chronoStamp} alt="chrono-stamp" className="rounded-circle overflow-hidden" width={70} height={70} />
+                <img src={blessing} alt="blessing" className="rounded-circle overflow-hidden" width={70} height={70} />
+                <img src={torrentialSurge} alt="torrential-surge" className="rounded-circle overflow-hidden" width={70} height={70} />
+                <img src={shadowStep} alt="shadow-step" className="rounded-circle overflow-hidden" width={70} height={70} />
+                <img src={naturalGrowth} alt="natural-growth" className="rounded-circle overflow-hidden" width={70} height={70} />
+                <img src={phoenixBarrier} alt="phoenix-barrier" className="rounded-circle overflow-hidden" width={70} height={70} />
+                <img src={paranormalArea} alt="paranormal-area" className="rounded-circle overflow-hidden" width={70} height={70} />
             </div>
         </div>
     )

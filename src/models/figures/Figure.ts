@@ -32,13 +32,13 @@ export class Figure {
 
     canMove(target: Cell, ignoreCheck: boolean = false): boolean {
         if (this.color === target.figure?.color) return false
-        const appliedSpells = this.cell.board.activeSpells.filter(spell => spell.phase === SpellPhases.BEFORE_MOVE && spell.affectedEntity === this)
+        const appliedSpells = this.cell.game.activeSpells.filter(spell => spell.phase === SpellPhases.BEFORE_MOVE && spell.affectedEntity === this)
         const canMoveAfterSpells = appliedSpells.map(spell => spell.apply(target)).reduce((accumulator, currentValue) => accumulator && currentValue, true)
         if (!canMoveAfterSpells) return false
         return true
     }
 
     moveFigure(target: Cell) {
-        if (!target.board.gameInProgress) return
+        if (!target.game.gameInProgress) return
     }
 }
