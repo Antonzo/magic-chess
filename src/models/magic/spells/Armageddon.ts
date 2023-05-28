@@ -1,11 +1,10 @@
-import {SpellPhases} from "models/magic/Spell"
+import {SpellPhases, SpellTargets} from "models/magic/Spell"
 import {GameSpell} from "models/magic/GameSpell"
 import {Game} from "models/game/Game"
 import {getRandomNumbersInRange} from "utils/calculations"
 import {King} from "models/figures/King"
-import armageddonLogo from "assets/magic/armageddon-spell.png"
 import {Player} from "models/game/Player"
-
+import armageddonLogo from "assets/magic/armageddon.png"
 
 export class Armageddon extends GameSpell {
     affectedEntity: Game
@@ -14,7 +13,7 @@ export class Armageddon extends GameSpell {
     static logo = armageddonLogo
 
     constructor(caster: Player, game: Game) {
-        super(caster, game, SpellPhases.INSTANT, 1)
+        super(caster, game, SpellPhases.INSTANT, SpellTargets.NONE, 1)
         this.affectedEntity = game
     }
 

@@ -1,7 +1,7 @@
 import {Cell} from "models/game/Cell"
 import {Figure} from "models/figures/Figure"
 import {Game} from "models/game/Game"
-import logo from "assets/magic/armageddon-spell.png"
+import logo from "assets/magic/armageddon.png"
 import {Player} from "models/game/Player"
 
 type AffectedEntityType = Game | Cell | Figure
@@ -12,10 +12,18 @@ export enum SpellPhases {
     AFTER = "After",
 }
 
+export enum SpellTargets {
+    ALLY = "Ally",
+    ENEMY = "Enemy",
+    ALL = "All",
+    NONE = "None",
+}
+
 export class Spell {
     affectedEntity: AffectedEntityType
     caster: Player
     phase: SpellPhases
+    target: SpellTargets
     duration: number
     ticksLeft: number
     static logo: typeof logo | null
@@ -23,10 +31,17 @@ export class Spell {
     static description: string = ""
     id: number
 
-    constructor(caster: Player, affectedEntity: AffectedEntityType, phase: SpellPhases, duration: number) {
+    constructor(
+        caster: Player,
+        affectedEntity: AffectedEntityType,
+        phase: SpellPhases,
+        target: SpellTargets,
+        duration: number
+    ) {
         this.caster = caster
         this.affectedEntity = affectedEntity
         this.phase = phase
+        this.target = target
         this.duration = duration
         this.ticksLeft = duration
         this.id = Math.random()
