@@ -1,6 +1,6 @@
-import {Cell} from "models/Cell"
-import {Colors} from "models/Colors"
-import {GameOutcome} from "models/GameOutcome"
+import {Cell} from "models/game/Cell"
+import {Colors} from "models/game/Colors"
+import {GameOutcome} from "models/game/GameOutcome"
 import {Pawn} from "models/figures/Pawn"
 import {King} from "models/figures/King"
 import {Queen} from "models/figures/Queen"
@@ -8,8 +8,8 @@ import {Bishop} from "models/figures/Bishop"
 import {Rook} from "models/figures/Rook"
 import {Knight} from "models/figures/Knight"
 import {Figure} from "models/figures/Figure"
-import {Player} from "models/Player"
-import {Spell} from "models/spells/Spell"
+import {Player} from "models/game/Player"
+import {Spell} from "models/magic/Spell"
 
 export class Board {
     cells: Cell[][] = []

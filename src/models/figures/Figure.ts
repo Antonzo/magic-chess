@@ -1,6 +1,7 @@
 import logo from 'assets/figures/black-king.png'
-import {Colors} from "models/Colors"
-import {Cell} from "models/Cell"
+import {Colors} from "models/game/Colors"
+import {Cell} from "models/game/Cell"
+import {SpellPhases} from "models/magic/Spell"
 
 export enum FigureNames {
     FIGURE = "Figure",
@@ -31,6 +32,9 @@ export class Figure {
 
     canMove(target: Cell, ignoreCheck: boolean = false): boolean {
         if (this.color === target.figure?.color) return false
+        const appliedSpells = this.cell.board.activeSpells.filter(spell => spell.phase === SpellPhases.BEFORE_MOVE && spell.affectedEntity === this)
+        const canMoveAfterSpells = appliedSpells.map(spell => spell.apply(target)).reduce((accumulator, currentValue) => accumulator && currentValue, true)
+        if (!canMoveAfterSpells) return false
         return true
     }
 

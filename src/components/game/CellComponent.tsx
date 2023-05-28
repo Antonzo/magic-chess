@@ -1,8 +1,8 @@
 import React, {FC, useEffect, useState} from 'react'
-import {Cell} from "models/Cell"
+import {Cell} from "models/game/Cell"
 import {indexToChessLetter, indexToChessNumber} from "utils/mappings"
 import "components/game/CellComponent.scss"
-import {Colors} from "../../models/Colors";
+import {Colors} from "../../models/game/Colors";
 
 interface CellProps {
     cell: Cell

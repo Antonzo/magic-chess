@@ -1,6 +1,6 @@
-import {Colors} from "models/Colors"
+import {Colors} from "models/game/Colors"
 import {Figure} from "models/figures/Figure"
-import {Board} from "models/Board"
+import {Board} from "models/game/Board"
 
 export class Cell {
     readonly x: number

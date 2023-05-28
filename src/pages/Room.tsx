@@ -11,7 +11,7 @@ import FortIcon from '@mui/icons-material/Fort'
 import WavingHandIcon from '@mui/icons-material/WavingHand'
 import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled'
 
-import {Board} from "models/Board"
+import {Board} from "models/game/Board"
 
 import "pages/Room.scss"
 

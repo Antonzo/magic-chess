@@ -1,6 +1,6 @@
 import React, {FC, useEffect, useState} from 'react'
-import {Board} from "models/Board"
-import {Cell} from "models/Cell"
+import {Board} from "models/game/Board"
+import {Cell} from "models/game/Cell"
 import CellComponent from "components/game/CellComponent"
 import "components/game/BoardComponent.scss"
 

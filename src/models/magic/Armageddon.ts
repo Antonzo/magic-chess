@@ -1,13 +1,14 @@
-import {Spell, SpellNames} from "models/spells/Spell"
-import {Board} from "models/Board"
+import {Spell, SpellNames, SpellPhases} from "models/magic/Spell"
+import {Board} from "models/game/Board"
 import {getRandomNumbersInRange} from "utils/calculations"
-import {Figure} from "models/figures/Figure";
+import {Figure} from "models/figures/Figure"
+
 
 export class Armageddon extends Spell {
-    affectedEntity: Board;
+    affectedEntity: Board
 
     constructor(board: Board, duration: number) {
-        super(board, board, 1)
+        super(board, board, SpellPhases.INSTANT, 1)
         this.affectedEntity = board
         this.name = SpellNames.ARMAGEDDON
     }
