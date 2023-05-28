@@ -34,10 +34,10 @@ export class Spell {
         this.description = ""
         this.id = Math.random()
         this.add()
-        if (this.phase === SpellPhases.INSTANT) this.apply()
+        if (this.phase === SpellPhases.INSTANT) this.cast()
     }
 
-    apply(...args: any[]): any {
+    cast(...args: any[]): any {
         this.tick()
     }
 

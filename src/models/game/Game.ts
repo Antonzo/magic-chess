@@ -75,7 +75,7 @@ export class Game {
     }
 
     public killFigure(figure: Figure) {
-        figure.cell.figure = null
+        figure.cell.setFigure(null)
         if (figure.color === Colors.BLACK) {
             this.lostBlackFigures.push(figure)
             this.activeBlackFigures = this.activeBlackFigures.filter(f => f.id !== figure.id)
@@ -120,7 +120,7 @@ export class Game {
         this.gameInProgress = false
         this.whitePlayer.deactivate()
         this.blackPlayer.deactivate()
-        alert(`Game over! ${outcome}`) // TODO: proper logic
+        console.log(`Game over! ${outcome}`) // TODO: proper logic
         return outcome
     }
 
@@ -220,6 +220,6 @@ export class Game {
         this.activeSpells.filter(
             (spell) => spell.caster.color === currentPlayerColor && spell.phase === SpellPhases.AFTER ||
                 spell.caster.color !== currentPlayerColor && spell.phase === SpellPhases.BEFORE
-        ).forEach(spell => spell.apply())
+        ).forEach(spell => spell.cast())
     }
 }

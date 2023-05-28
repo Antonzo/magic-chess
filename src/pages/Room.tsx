@@ -17,6 +17,7 @@ import shadowStep from "assets/magic/shadow-step-effect.png"
 import naturalGrowth from "assets/magic/natural-growth-spell.png"
 import phoenixBarrier from "assets/magic/phoenix-barrier-effect.png"
 import paranormalArea from "assets/magic/paranormal-area-effect.png"
+import resurrection from "assets/magic/resurrection-spell.png"
 
 import FortIcon from '@mui/icons-material/Fort'
 import WavingHandIcon from '@mui/icons-material/WavingHand'
@@ -25,6 +26,7 @@ import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled'
 import {Game} from "models/game/Game"
 
 import "pages/Room.scss"
+import {Armageddon} from "../models/magic/spells/Armageddon";
 
 function Room() {
     // Board main
@@ -91,7 +93,14 @@ function Room() {
                 <Timer player={board.whitePlayer} />
             </div>
             <div className="d-flex align-center justify-center">
-                <img src={armageddon} alt="armageddon" className="rounded-circle overflow-hidden" width={70} height={70} />
+                <img
+                    src={armageddon}
+                    alt="armageddon"
+                    className="rounded-circle overflow-hidden"
+                    width={70}
+                    height={70}
+                    onClick={() => {new Armageddon(board.whitePlayer, board)}}
+                />
                 <img src={astralStep} alt="atral-step" className="rounded-circle overflow-hidden" width={70} height={70} />
                 <img src={poison} alt="poison" className="rounded-circle overflow-hidden" width={70} height={70} />
                 <img src={frozenSoul} alt="frozen-soul" className="rounded-circle overflow-hidden" width={70} height={70} />
@@ -103,6 +112,7 @@ function Room() {
                 <img src={naturalGrowth} alt="natural-growth" className="rounded-circle overflow-hidden" width={70} height={70} />
                 <img src={phoenixBarrier} alt="phoenix-barrier" className="rounded-circle overflow-hidden" width={70} height={70} />
                 <img src={paranormalArea} alt="paranormal-area" className="rounded-circle overflow-hidden" width={70} height={70} />
+                <img src={resurrection} alt="resurrection" className="rounded-circle overflow-hidden" width={70} height={70} />
             </div>
         </div>
     )

@@ -87,9 +87,10 @@ export class Cell {
         return true
     }
 
-    public setFigure(figure: Figure) {
+    public setFigure(figure: Figure | null) {
         this.figure = figure
-        this.figure.cell = this
+        if (this.figure)
+            this.figure.cell = this
         this.notifyObservers()
     }
 
