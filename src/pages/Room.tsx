@@ -23,14 +23,16 @@ import FortIcon from '@mui/icons-material/Fort'
 import WavingHandIcon from '@mui/icons-material/WavingHand'
 import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled'
 
+import {Armageddon} from "models/magic/spells/Armageddon"
+import {SpellFactory} from "models/magic/SpellFactory"
 import {Game} from "models/game/Game"
 
 import "pages/Room.scss"
-import {Armageddon} from "../models/magic/spells/Armageddon";
 
 function Room() {
-    // Board main
-    const [board, setBoard] = useState(new Game())
+    // Game main
+    const [game, setGame] = useState(new Game())
+    const [spellFactory, setSpellFactory] = useState(new SpellFactory())
 
     useEffect(() => {
         initGame()
@@ -38,13 +40,13 @@ function Room() {
 
 
     function initGame() {
-        const newBoard = new Game()
-        setBoard(newBoard)
+        const newGame = new Game()
+        setGame(newGame)
     }
 
     // TODO: create proper start game logic
     function onStartClick() {
-        board.start()
+        game.start()
     }
 
     // Lost figures pane
@@ -66,11 +68,11 @@ function Room() {
             <SlideOutPane active={figuresPaneModal} toggle={handleFiguresPaneToggle}>
                 <LostFigures
                     title="Black figures"
-                    figures={board.lostBlackFigures}
+                    figures={game.lostBlackFigures}
                 />
                 <LostFigures
                     title="White figures"
-                    figures={board.lostWhiteFigures}
+                    figures={game.lostWhiteFigures}
                 />
             </SlideOutPane>
             <SlideOutPane active={spellsPaneModal} orientation="right" toggle={handleSpellsPaneToggle}>
@@ -88,9 +90,9 @@ function Room() {
                         <WavingHandIcon />
                     </Button>
                 </div>
-                <Timer player={board.blackPlayer} />
-                <BoardComponent board={board} />
-                <Timer player={board.whitePlayer} />
+                <Timer player={game.blackPlayer} />
+                <BoardComponent board={game} />
+                <Timer player={game.whitePlayer} />
             </div>
             <div className="d-flex align-center justify-center">
                 <img
@@ -99,7 +101,7 @@ function Room() {
                     className="rounded-circle overflow-hidden"
                     width={70}
                     height={70}
-                    onClick={() => {new Armageddon(board.whitePlayer, board)}}
+                    onClick={() => spellFactory.create(Armageddon)}
                 />
                 <img src={astralStep} alt="atral-step" className="rounded-circle overflow-hidden" width={70} height={70} />
                 <img src={poison} alt="poison" className="rounded-circle overflow-hidden" width={70} height={70} />

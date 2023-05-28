@@ -19,8 +19,8 @@ export class Spell {
     logo: typeof logo | null
     duration: number
     ticksLeft: number
-    name: string
-    description: string
+    static spellName: string = "spell"
+    static description: string = ""
     id: number  // For react keys
 
     constructor(caster: Player, affectedEntity: AffectedEntityType, phase: SpellPhases, duration: number) {
@@ -28,10 +28,8 @@ export class Spell {
         this.affectedEntity = affectedEntity
         this.phase = phase
         this.logo = null
-        this.name = "Spell"
         this.duration = duration
         this.ticksLeft = duration
-        this.description = ""
         this.id = Math.random()
         this.add()
         if (this.phase === SpellPhases.INSTANT) this.cast()

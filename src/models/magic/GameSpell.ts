@@ -4,10 +4,9 @@ import {Player} from "models/game/Player"
 
 
 export class GameSpell extends Spell {
-    name: string
+    static spellName: string = "game spell"
 
     constructor(caster: Player, affectedEntity: Game, phase: SpellPhases, duration: number) {
         super(caster, affectedEntity, phase, duration)
-        this.name = "GameSpell"
     }
 }

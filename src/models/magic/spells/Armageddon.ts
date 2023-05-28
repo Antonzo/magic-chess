@@ -9,12 +9,12 @@ import {Player} from "models/game/Player"
 
 export class Armageddon extends GameSpell {
     affectedEntity: Game
+    static spellName: string = "armageddon"
+    static description: string = "Randomly designates five cells on a chessboard and eliminates all the pieces on those specific cells."
 
     constructor(caster: Player, game: Game) {
         super(caster, game, SpellPhases.INSTANT, 1)
         this.affectedEntity = game
-        this.name = "armageddon"
-        this.description = "Randomly designates five cells on a chessboard and eliminates all the pieces on those specific cells."
         this.logo = armageddonLogo
     }
 
