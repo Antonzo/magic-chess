@@ -1,5 +1,5 @@
 import React, {FC, useEffect, useState} from 'react'
-import {Player} from "models/Player"
+import {Player} from "models/game/Player"
 import "components/game/Timer.scss"
 import { formatTime } from "utils/timeUtils"
 

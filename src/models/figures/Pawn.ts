@@ -1,8 +1,8 @@
 import {Figure, FigureNames} from "models/figures/Figure"
-import {Colors} from "models/Colors"
-import {Cell} from "models/Cell"
-import blackLogo from "assets/black-pawn.png"
-import whiteLogo from "assets/white-pawn.png"
+import {Colors} from "models/game/Colors"
+import {Cell} from "models/game/Cell"
+import blackLogo from "assets/figures/black-pawn.png"
+import whiteLogo from "assets/figures/white-pawn.png"
 
 export class Pawn extends Figure {
 
@@ -23,7 +23,7 @@ export class Pawn extends Figure {
         const stepCondition = ((target.y === this.cell.y + direction || this.isFirstStep
                 && (target.y === this.cell.y + firstStepDirection))
             && target.x === this.cell.x
-            && this.cell.board.getCell(target.x, target.y).isEmpty())
+            && this.cell.game.getCell(target.x, target.y).isEmpty())
         // Attack
         const attackCondition = (target.y === this.cell.y + direction
             && (target.x === this.cell.x + 1 || target.x === this.cell.x - 1)

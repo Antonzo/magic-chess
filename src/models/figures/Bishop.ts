@@ -1,8 +1,8 @@
 import {Figure, FigureNames} from "models/figures/Figure"
-import {Colors} from "models/Colors"
-import {Cell} from "models/Cell"
-import blackLogo from "assets/black-bishop.png"
-import whiteLogo from "assets/white-bishop.png"
+import {Colors} from "models/game/Colors"
+import {Cell} from "models/game/Cell"
+import blackLogo from "assets/figures/black-bishop.png"
+import whiteLogo from "assets/figures/white-bishop.png"
 
 
 export class Bishop extends Figure {

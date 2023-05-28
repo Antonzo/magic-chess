@@ -1,6 +1,6 @@
-import {Cell} from "models/Cell"
-import {Colors} from "models/Colors"
-import {GameOutcome} from "models/GameOutcome"
+import {Cell} from "models/game/Cell"
+import {Colors} from "models/game/Colors"
+import {GameOutcome} from "models/game/GameOutcome"
 import {Pawn} from "models/figures/Pawn"
 import {King} from "models/figures/King"
 import {Queen} from "models/figures/Queen"
@@ -8,9 +8,12 @@ import {Bishop} from "models/figures/Bishop"
 import {Rook} from "models/figures/Rook"
 import {Knight} from "models/figures/Knight"
 import {Figure} from "models/figures/Figure"
-import {Player} from "models/Player"
+import {Player} from "models/game/Player"
+import {GameSpell} from "models/magic/GameSpell"
+import {SpellPhases} from "models/magic/Spell"
+import {SpellMeta, SpellFactory} from "models/magic/SpellFactory"
 
-export class Board {
+export class Game {
     cells: Cell[][] = []
     cellsUnderWhiteAttack: Cell[] = []
     cellsUnderBlackAttack: Cell[] = []
@@ -23,8 +26,10 @@ export class Board {
     blackPlayer: Player
     whitePlayer: Player
     gameInProgress: boolean = false
+    activeSpells: GameSpell[] = []
+    spellFactory: SpellFactory
 
-    constructor(time: number = 300) {
+    constructor(time: number = 300, spellsMeta: SpellMeta[] = [], mana: number = 100) {
         this.whitePlayer = new Player(Colors.WHITE, this, time)
         this.blackPlayer = new Player(Colors.BLACK, this, time)
         this.initCells()
@@ -32,6 +37,7 @@ export class Board {
         this.whiteKing = new King(Colors.WHITE, this.getCell(4, 7))
         this.addFigures()
         this.initActiveFigures()
+        this.spellFactory = new SpellFactory(spellsMeta, mana)
     }
 
     public start() {
@@ -54,6 +60,8 @@ export class Board {
             this.blackPlayer.deactivate()
             this.whitePlayer.activate()
         }
+        this.applyActiveSpells(currentPlayerColor)
+        this.spellFactory.tick()
     }
 
     public highlightCells(selectedCell: Cell | null) {
@@ -71,6 +79,7 @@ export class Board {
     }
 
     public killFigure(figure: Figure) {
+        figure.cell.setFigure(null)
         if (figure.color === Colors.BLACK) {
             this.lostBlackFigures.push(figure)
             this.activeBlackFigures = this.activeBlackFigures.filter(f => f.id !== figure.id)
@@ -115,7 +124,7 @@ export class Board {
         this.gameInProgress = false
         this.whitePlayer.deactivate()
         this.blackPlayer.deactivate()
-        alert(`Game over! ${outcome}`) // TODO: proper logic
+        console.log(`Game over! ${outcome}`) // TODO: proper logic
         return outcome
     }
 
@@ -126,7 +135,7 @@ export class Board {
             this.calculateAttackAreasWhite()
         this.swapPlayers(currentPlayerColor)
         const gameStatus = this.endGameStatus(currentPlayerColor)
-        if (gameStatus !== null)
+        if (gameStatus)
             this.endGame(gameStatus)
     }
     // private methods
@@ -209,5 +218,12 @@ export class Board {
             return "draw"
         }
         return null
+    }
+
+    private applyActiveSpells(currentPlayerColor: Colors) {
+        this.activeSpells.filter(
+            (spell) => spell.caster.color === currentPlayerColor && spell.phase === SpellPhases.AFTER ||
+                spell.caster.color !== currentPlayerColor && spell.phase === SpellPhases.BEFORE
+        ).forEach(spell => spell.cast())
     }
 }

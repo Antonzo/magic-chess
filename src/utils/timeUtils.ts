@@ -1,4 +1,4 @@
-export function formatTime(seconds: number): string {
+function formatTime(seconds: number): string {
     const hours = Math.floor(seconds / 3600)
     const minutes = Math.floor((seconds % 3600) / 60)
     const remainingSeconds = seconds % 60
@@ -9,3 +9,5 @@ export function formatTime(seconds: number): string {
 
     return formattedHours + formattedMinutes + formattedSeconds
 }
+
+export { formatTime }

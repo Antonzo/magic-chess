@@ -1,0 +1,19 @@
+@import "src/styles/variables/colors";
+
+.spell-logo {
+  height: fit-content;
+  width: fit-content;
+  line-height: 0;
+  &__cooldown {
+    top: 0;
+    left: 0;
+    background-color: rgba($colorBlack, 0.4);
+  }
+  &__amount {
+    width: 30px;
+    aspect-ratio: 1;
+    top: -5px;
+    right: -5px;
+    pointer-events: none;
+  }
+}

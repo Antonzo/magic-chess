@@ -1,0 +1,11 @@
+.spell-list {
+  &__spell {
+    display: grid;
+    column-gap: 8px;
+    grid-template-columns: min-content auto;
+    grid-template-rows: min-content auto;
+  }
+  &__logo {
+    grid-row: 1 / 3;
+  }
+}

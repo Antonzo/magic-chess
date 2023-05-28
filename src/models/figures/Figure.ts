@@ -1,6 +1,7 @@
-import logo from 'assets/black-king.png'
-import {Colors} from "models/Colors"
-import {Cell} from "models/Cell"
+import logo from 'assets/figures/black-king.png'
+import {Colors} from "models/game/Colors"
+import {Cell} from "models/game/Cell"
+import {FigureSpell} from "models/magic/FigureSpell"
 
 export enum FigureNames {
     FIGURE = "Figure",
@@ -13,12 +14,12 @@ export enum FigureNames {
 }
 
 export class Figure {
-    color: Colors
+    readonly color: Colors
     logo: typeof logo | null
     cell: Cell
     name: FigureNames
-    id: number
-
+    id: number  // For react keys
+    activeSpells: FigureSpell[] = []
 
     constructor(color: Colors, cell: Cell) {
         this.color = color
@@ -35,6 +36,6 @@ export class Figure {
     }
 
     moveFigure(target: Cell) {
-        if (!target.board.gameInProgress) return
+        if (!target.game.gameInProgress) return
     }
 }
