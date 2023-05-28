@@ -21,8 +21,8 @@ export class SpellFactory {
         this.spellsMeta.push(spellMeta)
     }
 
-    load<T extends Spell>(spellMeta: ISpellMeta<T>[]) {
-        spellMeta.forEach(spellMeta => this.push(spellMeta))
+    load<T extends Spell>(spellsMeta: ISpellMeta<T>[] = []) {
+        spellsMeta.forEach(spellMeta => this.push(spellMeta))
     }
 
     create<T extends Spell>(spellConstructor: (new (...args: any[]) => T), ...args: any[]) {
@@ -33,6 +33,12 @@ export class SpellFactory {
             spellMeta.cooldown = spellMeta.spell.prototype.duration
             return new spellConstructor(...args)
         }
+    }
+
+    tick() {
+        this.spellsMeta.forEach(spellMeta => {
+            if (spellMeta.cooldown > 0) spellMeta.cooldown--
+        })
     }
 }
 

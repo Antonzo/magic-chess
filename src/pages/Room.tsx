@@ -26,28 +26,14 @@ import WavingHandIcon from '@mui/icons-material/WavingHand'
 import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled'
 
 import {Armageddon} from "models/magic/spells/Armageddon"
-import {SpellFactory} from "models/magic/SpellFactory"
 import {Game} from "models/game/Game"
-import {spellMetaList} from "models/magic/settings/settings1"
+import {spellsMeta1} from "models/magic/settings/settings1"
 
 import "pages/Room.scss"
 
 function Room() {
     // Game main
-    const [game, setGame] = useState(new Game())
-    const [spellFactory, setSpellFactory] = useState(new SpellFactory())
-
-    useEffect(() => {
-        initGame()
-    }, [])
-
-
-    function initGame() {
-        const newGame = new Game()
-        spellFactory.load(spellMetaList)
-        setGame(newGame)
-        setSpellFactory(spellFactory)
-    }
+    const [game, setGame] = useState(new Game(300, spellsMeta1))
 
     // TODO: create proper start game logic
     function onStartClick() {
@@ -81,7 +67,7 @@ function Room() {
                 />
             </SlideOutPane>
             <SlideOutPane active={spellsPaneModal} orientation="right" toggle={handleSpellsPaneToggle}>
-                <SpellList spellsMeta={spellFactory.spellsMeta} />
+                <SpellList spellsMeta={game.spellFactory.spellsMeta} />
             </SlideOutPane>
             <div className="room__content d-flex flex-column">
                 <div className="d-flex justify-space-between full-width">
@@ -106,7 +92,7 @@ function Room() {
                     className="rounded-circle overflow-hidden"
                     width={70}
                     height={70}
-                    onClick={() => spellFactory.create(Armageddon)}
+                    onClick={() => game.spellFactory.create(Armageddon)}
                 />
                 <img src={astralStep} alt="atral-step" className="rounded-circle overflow-hidden" width={70} height={70} />
                 <img src={poison} alt="poison" className="rounded-circle overflow-hidden" width={70} height={70} />

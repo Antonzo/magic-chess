@@ -9,6 +9,6 @@ const ArmageddonSettings: ISpellMeta<Armageddon> = {
     id: Math.random()
 }
 
-const spellMetaList = [ArmageddonSettings]
+const spellsMeta1 = [ArmageddonSettings]
 
-export { spellMetaList }
+export { spellsMeta1 }

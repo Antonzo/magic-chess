@@ -5,3 +5,9 @@
     z-index: $z-ind;
   }
 }
+
+@each $cursor in $cursors {
+  .cursor-#{$cursor} {
+    cursor: $cursor;
+  }
+}
