@@ -33,7 +33,6 @@ const SpellCastPanel: FC<SpellCastingPanelProps> = ({
                     key={spellMeta.id}
                     spellMeta={spellMeta}
                     className="spell-casting-panel__logo"
-                    showAmount={true}
                     blockCast={blockCast}
                     onCast={() => handleClick(spellMeta)}
                 />

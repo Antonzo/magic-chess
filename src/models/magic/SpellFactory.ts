@@ -32,7 +32,6 @@ export class SpellMeta {
 export class SpellFactory {
     mana: number = 0
     spellsMeta: SpellMeta[] = []
-    private observers: ((factory: SpellFactory) => void)[] = []
 
     constructor(spellsMeta: SpellMeta[] = [], mana: number = 0) {
         this.spellsMeta = spellsMeta

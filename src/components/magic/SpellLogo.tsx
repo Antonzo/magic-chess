@@ -9,7 +9,8 @@ interface SpellLogoProps {
     className?: string
     onCast?: (event: MouseEvent<HTMLDivElement>) => void | null
     blockCast?: boolean
-    showAmount?: boolean
+    hideAmount?: boolean
+    hideCooldown?: boolean
 }
 
 const SpellLogo: FC<SpellLogoProps> = ({
@@ -18,7 +19,8 @@ const SpellLogo: FC<SpellLogoProps> = ({
     className = "",
     onCast= null,
     blockCast = false,
-    showAmount = false
+    hideAmount = false,
+    hideCooldown = false,
 }) => {
     const [cooldown, setCooldown] = useState(spellMeta.cooldown)
     const [amount, setAmount] = useState(spellMeta.amount)
@@ -52,12 +54,12 @@ const SpellLogo: FC<SpellLogoProps> = ({
                 width={size}
                 height={size}
             />
-            {showAmount && (
+            {!hideAmount && (
                 <div className="spell-logo__amount position-absolute d-flex align-center justify-center bg-black white font-bold rounded-circle z-3">
                     {amount}
                 </div>
             )}
-            { cooldown > 0 && (
+            {!hideCooldown && cooldown > 0 && (
                 <div className="spell-logo__cooldown position-absolute d-flex align-center justify-center full-width full-height rounded-circle z-2">
                     <p className="font-bold position-absolute headline-4 white pa-0">{cooldown}</p>
                 </div>
