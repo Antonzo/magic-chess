@@ -1,6 +1,7 @@
 import {Colors} from "models/game/Colors"
 import {Figure} from "models/figures/Figure"
 import {Game} from "models/game/Game"
+import {CellSpell} from "models/magic/CellSpell"
 
 export class Cell {
     readonly x: number
@@ -10,6 +11,7 @@ export class Cell {
     game: Game
     available: Boolean
     id: number // For react keys
+    activeSpells: CellSpell[] = []
     private observers: ((cell: Cell) => void)[] = []
 
     constructor(game: Game, x: number, y:number, color: Colors, figure: Figure | null) {

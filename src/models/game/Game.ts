@@ -9,7 +9,8 @@ import {Rook} from "models/figures/Rook"
 import {Knight} from "models/figures/Knight"
 import {Figure} from "models/figures/Figure"
 import {Player} from "models/game/Player"
-import {Spell} from "models/magic/Spell"
+import {GameSpell} from "models/magic/GameSpell"
+import {SpellPhases} from "models/magic/Spell"
 
 export class Game {
     cells: Cell[][] = []
@@ -24,7 +25,7 @@ export class Game {
     blackPlayer: Player
     whitePlayer: Player
     gameInProgress: boolean = false
-    activeSpells: Spell[] = []
+    activeSpells: GameSpell[] = []
 
     constructor(time: number = 300) {
         this.whitePlayer = new Player(Colors.WHITE, this, time)
@@ -56,6 +57,7 @@ export class Game {
             this.blackPlayer.deactivate()
             this.whitePlayer.activate()
         }
+        this.applyActiveSpells(currentPlayerColor)
     }
 
     public highlightCells(selectedCell: Cell | null) {
@@ -212,5 +214,12 @@ export class Game {
             return "draw"
         }
         return null
+    }
+
+    private applyActiveSpells(currentPlayerColor: Colors) {
+        this.activeSpells.filter(
+            (spell) => spell.caster.color === currentPlayerColor && spell.phase === SpellPhases.AFTER ||
+                spell.caster.color !== currentPlayerColor && spell.phase === SpellPhases.BEFORE
+        ).forEach(spell => spell.apply())
     }
 }

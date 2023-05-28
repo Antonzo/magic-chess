@@ -1,48 +1,56 @@
-import logo from 'assets/figures/black-king.png'
-import {Figure} from "models/figures/Figure"
 import {Cell} from "models/game/Cell"
+import {Figure} from "models/figures/Figure"
 import {Game} from "models/game/Game"
+import logo from "assets/magic/armageddon-spell.png"
+import {Player} from "models/game/Player"
 
-export enum SpellNames {
-    SPELL = "Spell",
-    ARMAGEDDON = "Armageddon",
-    POISON = "Poison",
-}
+type AffectedEntityType = Game | Cell | Figure
 
 export enum SpellPhases {
     INSTANT = "Instant",
-    BEFORE_MOVE = "Before move",
+    BEFORE = "Before",
+    AFTER = "After",
 }
-
-type AffectedEntityType = Game | Cell[] | Cell | Figure
 
 export class Spell {
     affectedEntity: AffectedEntityType
-    board: Game
+    caster: Player
     phase: SpellPhases
     logo: typeof logo | null
     duration: number
-    timeLeft: number
-    name: SpellNames
-    id: number
+    ticksLeft: number
+    name: string
+    description: string
+    id: number  // For react keys
 
-    constructor(board: Game, affectedEntity: AffectedEntityType, phase: SpellPhases, duration: number) {
-        this.board = board
+    constructor(caster: Player, affectedEntity: AffectedEntityType, phase: SpellPhases, duration: number) {
+        this.caster = caster
         this.affectedEntity = affectedEntity
         this.phase = phase
-        this.duration = duration
-        this.timeLeft = duration
         this.logo = null
-        this.name = SpellNames.SPELL
+        this.name = "Spell"
+        this.duration = duration
+        this.ticksLeft = duration
+        this.description = ""
         this.id = Math.random()
+        this.add()
+        if (this.phase === SpellPhases.INSTANT) this.apply()
     }
 
     apply(...args: any[]): any {
-        if (this.timeLeft > 0) this.timeLeft--
-        else this.remove()
+        this.tick()
+    }
+
+    tick() {
+        if (this.ticksLeft > 0) this.ticksLeft--
+        if (this.ticksLeft === 0) this.remove()
+    }
+
+    add() {
+        this.affectedEntity.activeSpells.push(this)
     }
 
     remove() {
-        this.board.activeSpells = this.board.activeSpells.filter(spell => spell.id !== this.id)
+        this.affectedEntity.activeSpells = this.affectedEntity.activeSpells.filter(spell => spell.id !== this.id)
     }
 }

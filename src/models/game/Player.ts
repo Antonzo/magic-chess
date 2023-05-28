@@ -2,7 +2,7 @@ import {Colors} from "models/game/Colors"
 import {Game} from "models/game/Game"
 
 export class Player {
-    color: Colors
+    readonly color: Colors
     game: Game
     active: boolean
     timeLeft: number
