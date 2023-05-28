@@ -10,8 +10,8 @@ import {Knight} from "models/figures/Knight"
 import {Figure} from "models/figures/Figure"
 import {Player} from "models/game/Player"
 import {GameSpell} from "models/magic/GameSpell"
-import {Spell, SpellPhases} from "models/magic/Spell"
-import {ISpellMeta, SpellFactory} from "models/magic/SpellFactory"
+import {SpellPhases} from "models/magic/Spell"
+import {SpellMeta, SpellFactory} from "models/magic/SpellFactory"
 
 export class Game {
     cells: Cell[][] = []
@@ -27,9 +27,9 @@ export class Game {
     whitePlayer: Player
     gameInProgress: boolean = false
     activeSpells: GameSpell[] = []
-    spellFactory: SpellFactory = new SpellFactory()
+    spellFactory: SpellFactory
 
-    constructor(time: number = 300, spellsMeta: ISpellMeta<Spell>[] = []) {
+    constructor(time: number = 300, spellsMeta: SpellMeta[] = [], mana: number = 100) {
         this.whitePlayer = new Player(Colors.WHITE, this, time)
         this.blackPlayer = new Player(Colors.BLACK, this, time)
         this.initCells()
@@ -37,7 +37,7 @@ export class Game {
         this.whiteKing = new King(Colors.WHITE, this.getCell(4, 7))
         this.addFigures()
         this.initActiveFigures()
-        this.spellFactory.load(spellsMeta)
+        this.spellFactory = new SpellFactory(spellsMeta, mana)
     }
 
     public start() {

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 
 import BoardComponent from "components/game/BoardComponent"
 import LostFigures from "components/game/LostFigures"
@@ -6,30 +6,19 @@ import Timer from "components/game/Timer"
 import SlideOutPane from "components/base/SlideOutPane"
 import Button from "components/base/Button"
 import SpellList from "components/magic/SpellList"
-
-import armageddon from "assets/magic/armageddon.png"
-import astralStep from "assets/magic/astral-step.png"
-import poison from "assets/magic/poison.png"
-import frozenSoul from "assets/magic/frozen-soul.png"
-import holyShield from "assets/magic/holy-shield.png"
-import chronoStamp from "assets/magic/chrono-stamp.png"
-import blessing from "assets/magic/blessing.png"
-import torrentialSurge from "assets/magic/torrential-surge.png"
-import shadowStep from "assets/magic/shadow-step.png"
-import naturalGrowth from "assets/magic/natural-growth.png"
-import phoenixBarrier from "assets/magic/phoenix-barrier.png"
-import paranormalArea from "assets/magic/paranormal-area.png"
-import resurrection from "assets/magic/resurrection.png"
+import SpellCastPanel from "components/magic/SpellCastPanel"
 
 import FortIcon from '@mui/icons-material/Fort'
 import WavingHandIcon from '@mui/icons-material/WavingHand'
 import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled'
 
-import {Armageddon} from "models/magic/spells/Armageddon"
 import {Game} from "models/game/Game"
+import {SpellMeta} from "models/magic/SpellFactory"
+import {Spell} from "models/magic/Spell"
 import {spellsMeta1} from "models/magic/settings/settings1"
 
 import "pages/Room.scss"
+
 
 function Room() {
     // Game main
@@ -52,6 +41,10 @@ function Room() {
 
     const handleSpellsPaneToggle = (value: boolean) => {
         setSpellsPaneModal(value)
+    }
+
+    const handleSpellCast = (spellMeta: SpellMeta) => {
+        game.spellFactory.create(spellMeta.spell)
     }
 
     return (
@@ -85,28 +78,7 @@ function Room() {
                 <BoardComponent board={game} />
                 <Timer player={game.whitePlayer} />
             </div>
-            <div className="d-flex align-center justify-center">
-                <img
-                    src={armageddon}
-                    alt="armageddon"
-                    className="rounded-circle overflow-hidden"
-                    width={70}
-                    height={70}
-                    onClick={() => game.spellFactory.create(Armageddon)}
-                />
-                <img src={astralStep} alt="atral-step" className="rounded-circle overflow-hidden" width={70} height={70} />
-                <img src={poison} alt="poison" className="rounded-circle overflow-hidden" width={70} height={70} />
-                <img src={frozenSoul} alt="frozen-soul" className="rounded-circle overflow-hidden" width={70} height={70} />
-                <img src={holyShield} alt="holy-shield" className="rounded-circle overflow-hidden" width={70} height={70} />
-                <img src={chronoStamp} alt="chrono-stamp" className="rounded-circle overflow-hidden" width={70} height={70} />
-                <img src={blessing} alt="blessing" className="rounded-circle overflow-hidden" width={70} height={70} />
-                <img src={torrentialSurge} alt="torrential-surge" className="rounded-circle overflow-hidden" width={70} height={70} />
-                <img src={shadowStep} alt="shadow-step" className="rounded-circle overflow-hidden" width={70} height={70} />
-                <img src={naturalGrowth} alt="natural-growth" className="rounded-circle overflow-hidden" width={70} height={70} />
-                <img src={phoenixBarrier} alt="phoenix-barrier" className="rounded-circle overflow-hidden" width={70} height={70} />
-                <img src={paranormalArea} alt="paranormal-area" className="rounded-circle overflow-hidden" width={70} height={70} />
-                <img src={resurrection} alt="resurrection" className="rounded-circle overflow-hidden" width={70} height={70} />
-            </div>
+            <SpellCastPanel factory={game.spellFactory} onSpell={handleSpellCast}/>
         </div>
     )
 }

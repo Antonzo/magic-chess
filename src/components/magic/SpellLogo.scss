@@ -9,4 +9,11 @@
     left: 0;
     background-color: rgba($colorBlack, 0.4);
   }
+  &__amount {
+    width: 30px;
+    aspect-ratio: 1;
+    top: -5px;
+    right: -5px;
+    pointer-events: none;
+  }
 }

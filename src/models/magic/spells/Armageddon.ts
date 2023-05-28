@@ -22,6 +22,7 @@ export class Armageddon extends GameSpell {
             const x = Math.floor(index / 8)
             const y = index % 8
             const killedFigure = this.affectedEntity.cells[x][y].figure
+            console.log(killedFigure)
             if (killedFigure) {
                 if (killedFigure instanceof King)
                     this.affectedEntity.endGame(killedFigure.color)
