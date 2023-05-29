@@ -17,6 +17,7 @@ import {SpellMeta} from "models/magic/SpellFactory"
 import {spellsMeta1} from "models/magic/settings/settings1"
 
 import "pages/Room.scss"
+import {Colors} from "../models/game/Colors";
 
 
 function Room() {
@@ -43,11 +44,11 @@ function Room() {
     }
 
     const handleSpellCastWhite = (spellMeta: SpellMeta) => {
-        game.spellFactoryWhite.create(spellMeta.spell, [game.whitePlayer, game])
+        game.processSpellCreation(Colors.WHITE, spellMeta)
     }
 
     const handleSpellCastBlack = (spellMeta: SpellMeta) => {
-        game.spellFactoryBlack.create(spellMeta.spell, [game.blackPlayer, game])
+        game.processSpellCreation(Colors.BLACK, spellMeta)
     }
 
     return (
@@ -79,7 +80,7 @@ function Room() {
                     </Button>
                 </div>
                 <Timer player={game.blackPlayer} />
-                <BoardComponent board={game} />
+                <BoardComponent game={game} />
                 <Timer player={game.whitePlayer} />
             </div>
             <SpellCastPanel factory={game.spellFactoryWhite} onSpell={handleSpellCastWhite} className="mt-4" />

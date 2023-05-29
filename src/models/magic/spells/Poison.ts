@@ -4,11 +4,13 @@ import {Player} from "models/game/Player"
 import {SpellPhases, SpellTargets} from "models/magic/Spell"
 
 export class Poison extends FigureSpell {
-    affectedEntity: Figure
     static spellName: string = "Poison"
 
-    constructor(caster: Player, figure: Figure) {
-        super(caster, figure, SpellPhases.AFTER, SpellTargets.ENEMY, 9)
-        this.affectedEntity = figure
+    constructor(caster: Player) {
+        super(caster, SpellPhases.AFTER, SpellTargets.ENEMY, 9)
+    }
+
+    cast(affectedEntity: Figure): any {
+        return super.cast(affectedEntity)
     }
 }

@@ -38,7 +38,7 @@ const CellComponent: FC<CellProps> = ({cell, selected, click}) => {
 
     return (
         <div
-            className={`cell position-relative d-flex justify-center align-center full-width bg-${colorClass}`}
+            className={`cell position-relative d-flex justify-center align-center full-width bg-${colorClass} ${cellAvailable && 'cursor-pointer'}`}
             onClick={() => click(cell)}
         >
             {cellAvailable && !cellFigure && <div className="cell__step-indicator rounded-circle bg-color-chess-selected" />}

@@ -1,6 +1,5 @@
 import { Spell } from "models/magic/Spell"
 
-
 export class SpellMeta {
     id: number
     private observers: ((spellMeta: SpellMeta) => void)[] = []
@@ -57,7 +56,6 @@ export class SpellFactory {
         if (spellMeta && spellMeta.amount > 0 && this.mana - spellMeta.cost >= 0 && spellMeta.cooldown === 0) {
             this.mana -= spellMeta.cost
             spellMeta.amount--
-            const spellInstance = new spellConstructor(...args)
             spellMeta.cooldown = spellMeta.cooldownDuration
             spellMeta.notifyObservers()
             return new spellConstructor(...args)
