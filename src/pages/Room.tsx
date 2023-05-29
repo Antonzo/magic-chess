@@ -14,7 +14,6 @@ import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled'
 
 import {Game} from "models/game/Game"
 import {SpellMeta} from "models/magic/SpellFactory"
-import {Spell} from "models/magic/Spell"
 import {spellsMeta1} from "models/magic/settings/settings1"
 
 import "pages/Room.scss"
@@ -43,8 +42,12 @@ function Room() {
         setSpellsPaneModal(value)
     }
 
-    const handleSpellCast = (spellMeta: SpellMeta) => {
-        game.spellFactory.create(spellMeta.spell)
+    const handleSpellCastWhite = (spellMeta: SpellMeta) => {
+        game.spellFactoryWhite.create(spellMeta.spell, [game.whitePlayer, game])
+    }
+
+    const handleSpellCastBlack = (spellMeta: SpellMeta) => {
+        game.spellFactoryBlack.create(spellMeta.spell, [game.blackPlayer, game])
     }
 
     return (
@@ -60,9 +63,10 @@ function Room() {
                 />
             </SlideOutPane>
             <SlideOutPane active={spellsPaneModal} orientation="right" toggle={handleSpellsPaneToggle}>
-                <SpellList spellsMeta={game.spellFactory.spellsMeta} />
+                <SpellList spellsMeta={game.spellFactoryWhite.spellsMeta} />
             </SlideOutPane>
-            <div className="room__content d-flex flex-column">
+            <SpellCastPanel factory={game.spellFactoryBlack} onSpell={handleSpellCastBlack}/>
+            <div className="room__content d-flex flex-column mt-4">
                 <div className="d-flex justify-space-between full-width">
                     <Button size="large" onClick={() => handleFiguresPaneToggle(!figuresPaneModal)}>
                         <FortIcon />
@@ -78,7 +82,7 @@ function Room() {
                 <BoardComponent board={game} />
                 <Timer player={game.whitePlayer} />
             </div>
-            <SpellCastPanel factory={game.spellFactory} onSpell={handleSpellCast}/>
+            <SpellCastPanel factory={game.spellFactoryWhite} onSpell={handleSpellCastWhite} className="mt-4" />
         </div>
     )
 }

@@ -27,7 +27,8 @@ export class Game {
     whitePlayer: Player
     gameInProgress: boolean = false
     activeSpells: GameSpell[] = []
-    spellFactory: SpellFactory
+    spellFactoryWhite: SpellFactory
+    spellFactoryBlack: SpellFactory
 
     constructor(time: number = 300, spellsMeta: SpellMeta[] = [], mana: number = 100) {
         this.whitePlayer = new Player(Colors.WHITE, this, time)
@@ -37,7 +38,10 @@ export class Game {
         this.whiteKing = new King(Colors.WHITE, this.getCell(4, 7))
         this.addFigures()
         this.initActiveFigures()
-        this.spellFactory = new SpellFactory(spellsMeta, mana)
+        const spellsMetaCopy1 = [...spellsMeta.map(spellMeta => spellMeta.copy())]
+        const spellsMetaCopy2 = [...spellsMeta.map(spellMeta => spellMeta.copy())]
+        this.spellFactoryWhite = new SpellFactory(spellsMetaCopy1, mana)
+        this.spellFactoryBlack = new SpellFactory(spellsMetaCopy2, mana)
     }
 
     public start() {
@@ -61,7 +65,8 @@ export class Game {
             this.whitePlayer.activate()
         }
         this.applyActiveSpells(currentPlayerColor)
-        this.spellFactory.tick()
+        this.spellFactoryWhite.tick()
+        this.spellFactoryBlack.tick()
     }
 
     public highlightCells(selectedCell: Cell | null) {

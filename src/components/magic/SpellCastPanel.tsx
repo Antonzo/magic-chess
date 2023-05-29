@@ -8,13 +8,15 @@ interface SpellCastingPanelProps {
     logoSize?: number
     onSpell?: (spellM: SpellMeta) => void | null
     blockCast?: boolean
+    className?: string
 }
 
 const SpellCastPanel: FC<SpellCastingPanelProps> = ({
     factory,
     logoSize= 70,
     onSpell= null,
-    blockCast = false
+    blockCast = false,
+    className = ""
 }) => {
     const [spellsMeta, setSpellsMeta] = useState(factory.spellsMeta)
 
@@ -27,7 +29,7 @@ const SpellCastPanel: FC<SpellCastingPanelProps> = ({
             onSpell(spellMeta)
     }
     return (
-        <div className="spell-casting-panel d-flex flex-wrap align-center justify-center full-width mt-4">
+        <div className={`spell-casting-panel d-flex flex-wrap align-center justify-center full-width ${className}`}>
             {spellsMeta.map((spellMeta) => (
                 <SpellLogo
                     key={spellMeta.id}
