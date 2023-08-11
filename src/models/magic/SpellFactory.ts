@@ -1,14 +1,14 @@
 import { Spell } from "models/magic/Spell"
 
-
 export class SpellMeta {
     id: number
     private observers: ((spellMeta: SpellMeta) => void)[] = []
 
     constructor(public spell: (new (...args: any[]) => Spell),
-                public cooldown: number,
                 public cost: number,
-                public amount: number
+                public amount: number,
+                public cooldownDuration: number,
+                public cooldown: number = cooldownDuration
     ) {
         this.id = Math.random()
     }
@@ -26,6 +26,11 @@ export class SpellMeta {
 
     public notifyObservers() {
         this.observers.forEach(observer => observer(this))
+    }
+
+    public copy() {
+        const { spell, cost, amount, cooldownDuration, cooldown } = this
+        return new SpellMeta(spell, cost, amount, cooldownDuration, cooldown)
     }
 }
 
@@ -46,15 +51,16 @@ export class SpellFactory {
         spellsMeta.forEach(spellMeta => this.push(spellMeta))
     }
 
-    create(spellConstructor: (new (...args: any[]) => Spell), ...args: any[]) {
+    create(spellConstructor: (new (...args: any[]) => Spell), args: any[]): Spell | null {
         const spellMeta = this.spellsMeta.find(spellMeta => spellMeta.spell === spellConstructor)
         if (spellMeta && spellMeta.amount > 0 && this.mana - spellMeta.cost >= 0 && spellMeta.cooldown === 0) {
             this.mana -= spellMeta.cost
             spellMeta.amount--
-            spellMeta.cooldown = spellMeta.spell.prototype.duration
+            spellMeta.cooldown = spellMeta.cooldownDuration
             spellMeta.notifyObservers()
             return new spellConstructor(...args)
         }
+        return null
     }
 
     tick() {

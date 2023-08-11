@@ -14,10 +14,10 @@ import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled'
 
 import {Game} from "models/game/Game"
 import {SpellMeta} from "models/magic/SpellFactory"
-import {Spell} from "models/magic/Spell"
 import {spellsMeta1} from "models/magic/settings/settings1"
 
 import "pages/Room.scss"
+import {Colors} from "../models/game/Colors";
 
 
 function Room() {
@@ -43,12 +43,16 @@ function Room() {
         setSpellsPaneModal(value)
     }
 
-    const handleSpellCast = (spellMeta: SpellMeta) => {
-        game.spellFactory.create(spellMeta.spell)
+    const handleSpellCastWhite = (spellMeta: SpellMeta) => {
+        game.processSpellCreation(Colors.WHITE, spellMeta)
+    }
+
+    const handleSpellCastBlack = (spellMeta: SpellMeta) => {
+        game.processSpellCreation(Colors.BLACK, spellMeta)
     }
 
     return (
-        <div className="room position-relative d-flex flex-column align-center justify-center full-width full-height px-sm-4">
+        <div className="room position-relative d-flex flex-column align-center justify-center full-width py-3 px-sm-4">
             <SlideOutPane active={figuresPaneModal} toggle={handleFiguresPaneToggle}>
                 <LostFigures
                     title="Black figures"
@@ -60,9 +64,10 @@ function Room() {
                 />
             </SlideOutPane>
             <SlideOutPane active={spellsPaneModal} orientation="right" toggle={handleSpellsPaneToggle}>
-                <SpellList spellsMeta={game.spellFactory.spellsMeta} />
+                <SpellList spellsMeta={game.spellFactoryWhite.spellsMeta} />
             </SlideOutPane>
-            <div className="room__content d-flex flex-column">
+            <SpellCastPanel factory={game.spellFactoryBlack} onSpell={handleSpellCastBlack}/>
+            <div className="room__content d-flex flex-column mt-4">
                 <div className="d-flex justify-space-between full-width">
                     <Button size="large" onClick={() => handleFiguresPaneToggle(!figuresPaneModal)}>
                         <FortIcon />
@@ -75,10 +80,10 @@ function Room() {
                     </Button>
                 </div>
                 <Timer player={game.blackPlayer} />
-                <BoardComponent board={game} />
+                <BoardComponent game={game} />
                 <Timer player={game.whitePlayer} />
             </div>
-            <SpellCastPanel factory={game.spellFactory} onSpell={handleSpellCast}/>
+            <SpellCastPanel factory={game.spellFactoryWhite} onSpell={handleSpellCastWhite} className="mt-4" />
         </div>
     )
 }

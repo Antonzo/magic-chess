@@ -10,8 +10,8 @@ import {Knight} from "models/figures/Knight"
 import {Figure} from "models/figures/Figure"
 import {Player} from "models/game/Player"
 import {GameSpell} from "models/magic/GameSpell"
-import {SpellPhases} from "models/magic/Spell"
-import {SpellMeta, SpellFactory} from "models/magic/SpellFactory"
+import {Spell, SpellPhases, SpellTargets} from "models/magic/Spell"
+import {SpellFactory, SpellMeta} from "models/magic/SpellFactory"
 
 export class Game {
     cells: Cell[][] = []
@@ -27,7 +27,9 @@ export class Game {
     whitePlayer: Player
     gameInProgress: boolean = false
     activeSpells: GameSpell[] = []
-    spellFactory: SpellFactory
+    spellFactoryWhite: SpellFactory
+    spellFactoryBlack: SpellFactory
+    pendingSpell: Spell | null = null
 
     constructor(time: number = 300, spellsMeta: SpellMeta[] = [], mana: number = 100) {
         this.whitePlayer = new Player(Colors.WHITE, this, time)
@@ -37,7 +39,10 @@ export class Game {
         this.whiteKing = new King(Colors.WHITE, this.getCell(4, 7))
         this.addFigures()
         this.initActiveFigures()
-        this.spellFactory = new SpellFactory(spellsMeta, mana)
+        const spellsMetaCopy1 = [...spellsMeta.map(spellMeta => spellMeta.copy())]
+        const spellsMetaCopy2 = [...spellsMeta.map(spellMeta => spellMeta.copy())]
+        this.spellFactoryWhite = new SpellFactory(spellsMetaCopy1, mana)
+        this.spellFactoryBlack = new SpellFactory(spellsMetaCopy2, mana)
     }
 
     public start() {
@@ -61,7 +66,8 @@ export class Game {
             this.whitePlayer.activate()
         }
         this.applyActiveSpells(currentPlayerColor)
-        this.spellFactory.tick()
+        this.spellFactoryWhite.tick()
+        this.spellFactoryBlack.tick()
     }
 
     public highlightCells(selectedCell: Cell | null) {
@@ -138,6 +144,27 @@ export class Game {
         if (gameStatus)
             this.endGame(gameStatus)
     }
+
+    public processSpellCreation(color: Colors, spellMeta: SpellMeta | null) {
+        if (spellMeta === null) {
+            this.pendingSpell = null
+            return
+        }
+        let createdSpell: Spell | null = null
+        if (color === Colors.WHITE)
+            createdSpell = this.spellFactoryWhite.create(spellMeta.spell, [this.whitePlayer])
+        else
+            createdSpell = this.spellFactoryBlack.create(spellMeta.spell, [this.whitePlayer])
+        if (createdSpell) {
+            if (createdSpell.target === SpellTargets.NONE && createdSpell.phase === SpellPhases.INSTANT) {
+                createdSpell.cast(this)
+            } else {
+                this.pendingSpell = createdSpell
+            }
+        }
+    }
+
+
     // private methods
     private initCells() {
         for (let i = 0; i < 8; i++) {
@@ -224,6 +251,6 @@ export class Game {
         this.activeSpells.filter(
             (spell) => spell.caster.color === currentPlayerColor && spell.phase === SpellPhases.AFTER ||
                 spell.caster.color !== currentPlayerColor && spell.phase === SpellPhases.BEFORE
-        ).forEach(spell => spell.cast())
+        ).forEach(spell => spell.tick())
     }
 }

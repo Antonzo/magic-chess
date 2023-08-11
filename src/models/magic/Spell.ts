@@ -6,26 +6,26 @@ import {Player} from "models/game/Player"
 
 type AffectedEntityType = Game | Cell | Figure
 
-export enum SpellPhases {
+enum SpellPhases {
     INSTANT = "Instant",
     BEFORE = "Before",
     AFTER = "After",
 }
 
-export enum SpellTargets {
+enum SpellTargets {
     ALLY = "Ally",
     ENEMY = "Enemy",
-    ALL = "All",
+    ANY = "Any",
     NONE = "None",
 }
 
-export class Spell {
-    affectedEntity: AffectedEntityType
+class Spell {
     caster: Player
     phase: SpellPhases
     target: SpellTargets
     duration: number
     ticksLeft: number
+    affectedEntity: AffectedEntityType | null = null
     static logo: typeof logo | null
     static spellName: string = "Spell"
     static description: string = ""
@@ -33,23 +33,21 @@ export class Spell {
 
     constructor(
         caster: Player,
-        affectedEntity: AffectedEntityType,
         phase: SpellPhases,
         target: SpellTargets,
         duration: number
     ) {
         this.caster = caster
-        this.affectedEntity = affectedEntity
         this.phase = phase
         this.target = target
         this.duration = duration
         this.ticksLeft = duration
         this.id = Math.random()
-        this.add()
-        if (this.phase === SpellPhases.INSTANT) this.cast()
     }
 
-    cast(...args: any[]): any {
+    cast(affectedEntity: AffectedEntityType, ...args: any[]): any {
+        this.affectedEntity = affectedEntity
+        this.add()
         this.tick()
     }
 
@@ -59,10 +57,14 @@ export class Spell {
     }
 
     add() {
-        this.affectedEntity.activeSpells.push(this)
+        this.affectedEntity?.activeSpells.push(this)
     }
 
     remove() {
-        this.affectedEntity.activeSpells = this.affectedEntity.activeSpells.filter(spell => spell.id !== this.id)
+        if (this.affectedEntity)
+            this.affectedEntity.activeSpells = this.affectedEntity.activeSpells.filter(spell => spell.id !== this.id)
     }
 }
+
+export {Spell, SpellPhases, SpellTargets }
+export type {AffectedEntityType}
