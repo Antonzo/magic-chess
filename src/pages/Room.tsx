@@ -52,7 +52,7 @@ function Room() {
     }
 
     return (
-        <div className="room position-relative d-flex flex-column align-center justify-center full-width full-height px-sm-4">
+        <div className="room position-relative d-flex flex-column align-center justify-center full-width py-3 px-sm-4">
             <SlideOutPane active={figuresPaneModal} toggle={handleFiguresPaneToggle}>
                 <LostFigures
                     title="Black figures"
