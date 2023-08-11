@@ -20,8 +20,10 @@ export class Pawn extends Figure {
         const direction = this.cell.figure?.color === Colors.BLACK ? 1 : -1
         const firstStepDirection = this.cell.figure?.color === Colors.BLACK ? 2 : -2
         // Step
-        const stepCondition = ((target.y === this.cell.y + direction || this.isFirstStep
-                && (target.y === this.cell.y + firstStepDirection))
+        const newYShort = this.cell.y + direction,
+            newYLong = this.cell.y + firstStepDirection
+        const stepCondition = ((target.y === newYShort || this.isFirstStep
+                && (target.y === newYLong) && this.cell.game.getCell(target.x, newYShort).isEmpty())
             && target.x === this.cell.x
             && this.cell.game.getCell(target.x, target.y).isEmpty())
         // Attack
